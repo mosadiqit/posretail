@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <template id="pos_order_template">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div>
+                            <p>
+                                <h3>
+                                    <span t-field="doc.name"/>
+                                    -
+                                    <span t-field="doc.state"/>
+                                </h3>
+                            </p>
+                            <h5>
+                                <table class="table table-responsive">
+                                    <tr>
+                                        <td>
+                                            <strong>Session</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.session_id.name"/>
+                                        </td>
+                                        <td>
+                                            <strong>Order Date</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.date_order"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Customer</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.partner_id.name"/>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </h5>
+                            <h5 t-if="doc.lines">
+                                <strong style="border-bottom:2px solid black;">Products:</strong>
+                            </h5>
+                            <table class="table table-bordered" t-if="doc.lines">
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Discount (%)</th>
+                                    <th>Taxes</th>
+                                    <th>Subtotal w/o Tax</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                                <t t-foreach="doc.lines" t-as="line">
+                                    <tr>
+                                        <td>
+                                            <span t-esc="line.product_id.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line.qty"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line.price_unit"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line.discount"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line.tax_ids_after_fiscal_position.id"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line.price_subtotal"
+                                                  t-options='{"widget": "monetary", "display_currency": line.company_id.currency_id}'/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line.price_subtotal_incl"
+                                                  t-options='{"widget": "monetary", "display_currency": line.company_id.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                            <h5 t-if="doc.statement_ids">
+                                <strong style="border-bottom:2px solid black;">Payments:</strong>
+                            </h5>
+                            <table class="table table-bordered" t-if="doc.statement_ids">
+                                <tr>
+                                    <th>Journal</th>
+                                    <th>Statement</th>
+                                    <th>Amount</th>
+                                </tr>
+                                <t t-foreach="doc.statement_ids" t-as="line">
+                                    <tr>
+                                        <td>
+                                            <span t-esc="line.statement_id.journal_id.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line.ref"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line.amount"
+                                                  t-options='{"widget": "monetary", "display_currency": line.company_id.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                            <h5>
+                                <strong style="border-bottom:2px solid black;">Extra Info:</strong>
+                            </h5>
+                            <h5>
+                                <table class="table table-responsive">
+                                    <tr>
+                                        <td>
+                                            <strong>Location</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.location_id.name"/>
+                                        </td>
+                                        <td>
+                                            <strong>Salesman</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.user_id.name"/>
+                                        </td>
+                                        <td>
+                                            <strong>Picking</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.picking_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Company</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.company_id.name"/>
+                                        </td>
+                                        <td>
+                                            <strong>Receipt Ref</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.pos_reference"/>
+                                        </td>
+                                        <td>
+                                            <strong>Sale Journal</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.sale_journal.name"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </h5>
+                            <h5 t-if="doc.note">
+                                <strong style="border-bottom:2px solid black;">Notes:</strong>
+                                <p>
+                                    <span t-field="doc.note"/>
+                                </p>
+                            </h5>
+                            <br/>
+                            <br/>
+                            <div class="row">
+                                <div class="col-xs-6 text-left">
+
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <strong>Signature:____________________</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <report
+            id="report_pos_order"
+            model="pos.order"
+            menu="True"
+            report_type="qweb-pdf"
+            string="Print report"
+            name="pos_retail.pos_order_template"
+            file="pos_retail.pos_order_template"
+         />
+
+    </data>
+</odoo>

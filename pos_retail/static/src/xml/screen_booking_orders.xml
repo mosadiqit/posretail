@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="popup_create_sale_order">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y" style="max-height: 600px;min-height: 300px;height: fit-content;">
+                <div class="card">
+                    <div class="card-content">
+                        <h4 class="card-title">
+                            <t t-if="widget.options.title">
+                                <t t-esc="widget.options.title"/>
+                            </t>
+                        </h4>
+                        <t t-if="widget.pos.get_order() and widget.pos.get_order().get_client()">
+                            <div class="row">
+                                <span class="label voucher-label">Amount total</span>
+                                <div class="col-sm-10">
+                                    <div class="form-group label-floating is-empty">
+                                        <input class='form-control' t-att-value="widget.format_currency(widget.pos.get_order().get_total_with_tax())" hidden="hidden" disabled="disabled"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <t t-if="widget.pos.config.sale_order_required_signature">
+                                <div class="row">
+                                    <span class="label voucher-label">Signature <span class="input-required"> (*) </span></span>
+                                    <div class="col-sm-10">
+                                        <div class="pos_signature" name="pos_signature"/>
+                                    </div>
+                                </div>
+                            </t>
+                            <div class="row">
+                                <span class="label voucher-label">Notes</span>
+                                <div class="col-sm-10">
+                                    <div class="form-group label-floating is-empty">
+                                        <input class='form-control sale_order_field note' name="note" t-att-value="widget.pos.get_order().note"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="label voucher-label">Payment term</label>
+                                <div class="col-sm-7">
+                                    <t t-if="widget.pos.payments_term">
+                                        <select class='form-control voucher-select sale_order_field payment_term_id' name="payment_term_id">
+                                            <t t-foreach='widget.pos.payments_term' t-as='term'>
+                                                <option t-att-value='term.id' t-att-selected="widget.pos.get_order().get_client()['property_payment_term_id'] ? ((widget.pos.get_order().get_client()['property_payment_term_id'] and widget.pos.get_order().get_client()['property_payment_term_id'][0] === term.id) ? true : undefined) : undefined">
+                                                    <t t-esc='term.name'/>
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </t>
+                                </div>
+                            </div>
+                            <span class="card-issue"/>
+                            <div class="form-footer text-center">
+                                <div class="btn btn-success pull-right create">
+                                    <i class="fa fa-check"/> Create
+                                </div>
+                                <div class="btn btn-danger pull-left cancel">
+                                    Close
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="button_booking_order">
+        <div class="left_button" title="Create Booking Order and save backend, when customer come, click Booked Order and find Orders">
+            <div class="button-icon">
+                <img src="/pos_retail/static/src/icons/booking.png" class="pos_logo"/>
+            </div>
+            <div class="button-name">
+                Booking order
+            </div>
+        </div>
+    </t>
+
+    <t t-name="button_go_sale_orders_screen">
+        <div class="left_button" title="Show all Booked Orders create from Sale Menu and POS Sessions">
+            <div class="button-icon">
+                <img src="/pos_retail/static/src/icons/booked.png" class="pos_logo"/>
+            </div>
+            <div class="button-name">
+                Booked Orders
+                <span class="notification booked_orders">0</span>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="popup_create_booking_order">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y" style="height: 800px">
+                <t t-if="widget.pos.get_order() and widget.pos.get_order().get_client()">
+                    <div class="card">
+                        <div class="card-content">
+                            <h4 class="card-title">
+                                Please input Delivery Information
+                            </h4>
+                            <div class="row">
+                                <span class="label voucher-label">Amount total</span>
+                                <div class="col-sm-10">
+                                    <div class="form-group label-floating is-empty">
+                                        <input class='form-control' t-att-value="widget.format_currency(widget.pos.get_order().get_total_with_tax())" hidden="hidden" disabled="disabled"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class="label voucher-label">Phone <span class="input-required"> (*) </span></span>
+                                <div class="col-sm-10">
+                                    <div class="form-group label-floating is-empty">
+                                        <input class='form-control booking_field' t-att-value='widget.pos.get_order().get_client().mobile || widget.pos.get_order().get_client().phone' name="delivery_phone"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class='label voucher-label'>Delivery Address <span class="input-required"> (*) </span></span>
+                                <div class="col-sm-10">
+                                    <div class="form-group label-floating is-empty">
+                                        <input type="text" class="form-control booking_field" name="delivery_address" t-att-value="widget.pos.get_order().delivery_address || widget.pos.get_order().get_client().address"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class='label voucher-label'>Delivery date <i class="fa fa-calendar"></i></span>
+                                <div class="col-sm-10">
+                                    <div class="form-group label-floating is-empty">
+                                        <input type="text" class="form-control datetimepicker booking_field" name="delivery_date" t-att-value="widget.pos.get_order().delivery_date || new Date()"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class="label voucher-label">Notes</span>
+                                <div class="col-sm-10">
+                                    <div class="form-group label-floating is-empty">
+                                        <input class='form-control booking_field' name="note" t-att-value="widget.pos.get_order().note"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <t t-if="widget.pos.config.booking_orders_required_cashier_signature">
+                                <div class="row">
+                                    <span class="label voucher-label">Signature <span class="input-required"> (*) </span></span>
+                                    <div class="col-sm-10">
+                                        <div class="pos_signature" name="pos_signature"/>
+                                    </div>
+                                </div>
+                            </t>
+                            <div class="row">
+                                <span class="label voucher-label">PriceList <span class="input-required"> (*)</span></span>
+                                <div class="col-sm-10">
+                                     <select class='form-control voucher-select' name='pricelist_id' id="pricelist_id">
+                                        <t t-if="widget.pos.pricelists">
+                                            <t t-foreach='widget.pos.pricelists' t-as='pricelist'>
+                                                <option t-att-value='pricelist.id' t-att-selected="pricelist['id'] ? ((widget.options.pricelist and pricelist.id === widget.options.pricelist['id']) ? true : undefined) : undefined">
+                                                    <t t-esc='pricelist.name'/>
+                                                </option>
+                                            </t>
+                                        </t>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class="label voucher-label">Payment partial amount</span>
+                                <div class="col-sm-10">
+                                    <div class="form-group label-floating is-empty">
+                                        <input type='number' class='form-control booking_field' name="payment_partial_amount"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class="label voucher-label">Payment Partial Journal</span>
+                                <div class="col-sm-10">
+                                     <select class='form-control voucher-select' name='payment_partial_journal_id' id="payment_partial_journal_id">
+                                        <t t-if="widget.pos.cashregisters">
+                                            <t t-foreach='widget.pos.cashregisters' t-as='cashregister'>
+                                                <option t-att-value='cashregister.journal_id[0]'>
+                                                    <t t-esc='cashregister.journal_id[1]'/>
+                                                </option>
+                                            </t>
+                                        </t>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="label voucher-label" style="margin-left: 10px">Payment Method</label>
+                                <div class="col-sm-10">
+                                    <div class="form-group label-floating is-empty">
+                                        <select class='form-control voucher-select' name='payment_method_id' id="payment_method_id">
+                                            <t t-if="widget.pos.payment_methods">
+                                                <t t-foreach='widget.pos.payment_methods' t-as='method'>
+                                                    <option t-att-value='method.id'>
+                                                        <t t-esc='method.name'/>
+                                                    </option>
+                                                </t>
+                                            </t>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="card-issue"/>
+                            <div class="form-footer text-right">
+                                <div class="btn btn-success pull-right confirm">
+                                    <i class="fa fa-check"/> Accept
+                                </div>
+                                <div class="btn btn-danger pull-left cancel">
+                                    Close
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+
+
+    <t t-name="button_create_sale_order">
+        <div class="left_button" title="Create Quotation/Sale Order">
+            <div class="button-icon">
+                <img src="/pos_retail/static/src/icons/shopping_cart.png" class="pos_logo"/>
+            </div>
+            <div class="button-name">
+                Create SO
+            </div>
+        </div>
+    </t>
+
+    <t t-name="sale_orders">
+        <div class="clientlist-screen screen">
+            <div class="full_width screen-content">
+                <section class="top-content">
+                    <span class='button back'>
+                        <i class='fa fa-angle-double-left'/>
+                        Back
+                    </span>
+                    <span class='searchbox search-pos-order'>
+                        <input placeholder='Search Order' />
+                        <span class='search-clear'/>
+                    </span>
+                    <span class="button button_sync">
+                        Sync
+                        <i class="fa fa-refresh"></i>
+                    </span>
+                    <span class='button button-top-left booked_order_button'>
+                        Booked order
+                        <i class='fa fa-info'></i>
+                    </span>
+                    <span class='button button-top-right sale_lock_button'>
+                        Sale/Locked
+                        <i class='fa fa-info'></i>
+                    </span>
+                </section>
+                <section class="full-content">
+                    <div class='window'>
+                        <section class='subwindow collapsed'>
+                            <div class='subwindow-container collapsed'>
+                                <div class='subwindow-container-fix sale_order_detail'>
+                                </div>
+                            </div>
+                        </section>
+                        <section class='subwindow'>
+                            <div class='subwindow-container'>
+                                <div class='subwindow-container-fix touch-scrollable scrollable-y'>
+                                    <table class='client-list'>
+                                        <thead>
+                                            <tr>
+                                                <th><a href="#" class="sort sort_by_sale_order_id">ID</a></th>
+                                                <th><a href="#" class="sort sort_by_create_date">Create Date</a></th>
+                                                <th><a href="#" class="sort sort_by_sale_order_name">Name</a></th>
+                                                <th><a href="#" class="sort sort_by_sale_order_origin">Origin</a></th>
+                                                <th><a href="#" class="sort sort_by_sale_order_sale_person">Sale Person</a></th>
+                                                <th><a href="#" class="sort sort_by_sale_order_partner_name">Partner</a></th>
+                                                <th><a href="#" class="sort sort_by_sale_order_date_order">Date Order</a></th>
+                                                <th><a href="#" class="sort sort_by_sale_order_payment_partial_amount">Partial</a></th>
+                                                <th class="text-right"><a href="#" class="sort sort_by_sale_order_amount_tax">Tax</a></th>
+                                                <th class="text-right"><a href="#" class="sort sort_by_sale_order_amount_total">Total</a></th>
+                                                <th class="text-right"><a href="#" class="sort sort_by_sale_order_state">State</a></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class='client-list-contents sale_orders_table'>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="sale_order_lines">
+        <table class='client-list'>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Delivered</th>
+                    <th>Price</th>
+                    <th>Sub total</th>
+                </tr>
+            </thead>
+            <tbody class='client-list-contents'>
+                <t t-set="number" t-value="1"/>
+                <t t-foreach='lines' t-as='line'>
+                    <tr class='client-line' t-att-data-id='line.id'>
+                        <td><t t-esc='number'/></td>
+                        <td><t t-esc='line.name'/></td>
+                        <td><t t-esc='line.product_uom_qty'/></td>
+                        <td><t t-esc='line.qty_delivered'/></td>
+                        <td><t t-esc='line.price_unit'/></td>
+                        <td><t t-esc='line.price_total'/></td>
+                    </tr>
+                    <t t-set="number" t-value="number + 1"/>
+                </t>
+            </tbody>
+        </table>
+    </t>
+
+    <t t-name="sale_row">
+        <tr class='client-line sale_row' t-att-data-id='sale.id'>
+            <td><t t-esc='sale.id'/></td>
+            <td><t t-esc='sale.create_date'/></td>
+            <td><t t-esc='sale.name'/></td>
+            <td>
+                <t t-if="sale.origin">
+                    <t t-esc='sale.origin'/>
+                </t>
+                <t t-if="!sale.origin">
+                    N/A
+                </t>
+            </td>
+            <td>
+                <t t-esc='sale.sale_person'/>
+            </td>
+            <td>
+                <t t-if="sale.partner">
+                    <t t-esc='sale.partner.name'/>
+                </t>
+                <t t-if="!sale.partner">
+                    N/A
+                </t>
+            </td>
+            <td>
+                <t t-if="sale.date_order">
+                    <t t-esc='sale.date_order'/>
+                </t>
+                <t t-if="!sale.date_order">
+                    N/A
+                </t>
+            </td>
+            <td>
+                <t t-if="sale.payment_partial_amount">
+                    <t t-esc='sale.payment_partial_amount'/>
+                </t>
+                <t t-if="!sale.payment_partial_amount">
+                    N/A
+                </t>
+            </td>
+            <td class="text-right"><t t-esc='widget.format_currency(sale.amount_tax)'/></td>
+            <td class="text-right"><t t-esc='widget.format_currency(sale.amount_total)'/></td>
+            <td class="text-right">
+                <t t-if="sale.state == 'draft'">Quotation</t>
+                <t t-if="sale.state == 'sent'">Quotation Sent</t>
+                <t t-if="sale.state == 'sale'">Sales Order</t>
+                <t t-if="sale.state == 'done'">Locked</t>
+                <t t-if="sale.state == 'cancel'">Cancelled</t>
+                <t t-if="sale.state == 'booked'">Booked</t>
+            </td>
+        </tr>
+    </t>
+
+    <t t-name="sale_order_detail">
+        <section class='touch-scrollable scrollable-y client-details' style="max-height: 400px">
+            <t t-if="sale.partner">
+                <div class='client-picture'>
+                    <img t-att-src='widget.partner_icon_url(sale.partner.id)' />
+                </div>
+            </t>
+            <div class='client-name'>
+                <t t-if="sale.name">
+                    <t t-esc="sale.name"/>
+                </t>
+            </div>
+            <div class='client-details-box clearfix'>
+                <div class='client-details-left'>
+                    <t t-if="sale.origin">
+                        <div class='client-detail'>
+                            <span class='label'>Source Document</span>
+                            <t t-esc='sale.origin'/>
+                        </div>
+                    </t>
+                    <t t-if="sale.partner">
+                        <div class='client-detail'>
+                            <span class='label'>Customer</span>
+                            <t t-esc="sale.partner.name"/>
+                        </div>
+                        <t t-if="sale.partner.email">
+                            <div class='client-detail'>
+                                <span class='label'>Email</span>
+                                <t t-esc="sale.partner.email"/>
+                            </div>
+                        </t>
+                        <t t-if="sale.partner.phone || sale.partner.mobile">
+                            <div class='client-detail'>
+                                <span class='label'>Phone/Mobile</span>
+                                <t t-esc="sale.partner.phone || sale.partner.mobile"/>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-if="sale.client_order_ref">
+                        <div class='client-detail'>
+                            <span class='label'>Client ref</span>
+                            <t t-esc='sale.client_order_ref'/>
+                        </div>
+                    </t>
+                    <div class='client-detail'>
+                        <span class='label'>Date order</span>
+                        <t t-esc='sale.date_order'/>
+                    </div>
+                    <div class='client-detail'>
+                        <span class='label'>Order Lines</span>
+                        <div class='lines_detail'/>
+                    </div>
+                </div>
+                <div class='client-details-right'>
+                    <t t-if="sale.note">
+                        <div class='client-detail state'>
+                            <span class='label'>Note</span>
+                            <t t-if="sale.note">
+                                <t t-esc='sale.note'/>
+                            </t>
+                        </div>
+                    </t>
+                    <div class='client-detail state'>
+                        <span class='label'>State</span>
+                        <t t-if="sale.state == 'draft'">Quotation</t>
+                        <t t-if="sale.state == 'sent'">Quotation Sent</t>
+                        <t t-if="sale.state == 'sale'">Sales Order</t>
+                        <t t-if="sale.state == 'done'">Locked</t>
+                        <t t-if="sale.state == 'cancel'">Cancelled</t>
+                        <t t-if="sale.state == 'booked'">Booked</t>
+                    </div>
+                    <t t-if="sale.payment_term_id">
+                        <div class='client-detail state'>
+                            <span class='label'>Payment term</span>
+                            <t t-if="sale.payment_term_id">
+                                <t t-esc='sale.payment_term_id[1]'/>
+                            </t>
+                        </div>
+                    </t>
+                    <div class='client-detail state'>
+                        <span class='label'>Partial Payment</span>
+                        <t t-esc='widget.format_currency(sale.payment_partial_amount)'/>
+                    </div>
+                    <div class='client-detail state'>
+                        <span class='label'>Amount tax</span>
+                        <t t-esc='widget.format_currency(sale.amount_tax)'/>
+                    </div>
+                    <div class='client-detail state'>
+                        <span class='label'>Amount total</span>
+                        <t t-esc='widget.format_currency(sale.amount_total)'/>
+                    </div>
+                    <div class='client-detail'>
+                        <span class='label'>Open Order</span>
+                        <a class='so_link' target='_blank' t-att-href="sale.link">(Click here)</a>
+                    </div>
+                    <t t-if="widget.pos.session.session_info == '11.0' or widget.pos.session.session_info == '11.0+e'">
+                        <div class='client-detail'>
+                            <span class='label'>Print Quotation</span>
+                            <button style="width: 120px; height:45px" type="button" rel="tooltip" class="btn btn-success print_quotation">
+                                <i class="fa fa-print"/>
+                            </button>
+                        </div>
+                        <div class='client-detail'>
+                            <span class='label'>PRO-FORMA Invoice</span>
+                            <button style="width: 120px; height:45px" type="button" rel="tooltip" class="btn btn-success action_report_pro_forma_invoice">
+                                <i class="fa fa-print"/>
+                            </button>
+                        </div>
+                    </t>
+                    <t t-if="sale.state != 'done'">
+                        <t>
+                            <div class='client-detail'>
+                                <span class='label'>Covert POS order</span>
+                                <button style="width: 120px; height:45px" type="button" rel="tooltip" class="btn btn-success action_covert_to_pos_order">
+                                    <i class="fa fa-check"/>
+                                </button>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-if="widget.pos.config.booking_allow_confirm_sale">
+                        <t t-if="sale.state == 'draft' or sale.state == 'sent'">
+                            <div class='client-detail'>
+                                <span class='label'>Confirm Sale</span>
+                                <button style="width: 120px; height:45px" type="button" rel="tooltip" class="btn btn-success action_confirm">
+                                    <i class="fa fa-check"/>
+                                </button>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-if="sale.state == 'sale'">
+                        <div class='client-detail'>
+                            <span class='label'>Lock/Done</span>
+                            <button style="width: 120px; height:45px" type="button" rel="tooltip" class="btn btn-success action_done">
+                                <i class="fa fa-check"/>
+                            </button>
+                        </div>
+                    </t>
+                    <t t-if="sale.picking_ids and sale.picking_ids.length == 1">
+                        <div class='client-detail'>
+                            <span class='label'>Return products</span>
+                            <button style="width: 120px; height:45px" type="button" rel="tooltip" class="btn btn-danger action_return">
+                                <i class="fa fa-angle-left"/>
+                            </button>
+                        </div>
+                    </t>
+                    <t t-if="widget.pos.session.session_info == '11.0' or widget.pos.session.session_info == '11.0+e'">
+                        <t t-if="sale.state == 'sale' or sale.state == 'done'">
+                            <div class='client-detail'>
+                                <span class='label'>Validate Delivery</span>
+                                <button style="width: 120px; height:45px" type="button" rel="tooltip" class="btn btn-success action_validate_picking">
+                                    <i class="fa fa-certificate"/>
+                                </button>
+                            </div>
+                        </t>
+                    </t>
+                    <t>
+                        <div class='client-detail'>
+                            <span class='label'>Print receipt</span>
+                            <button style="width: 120px; height:45px" type="button" rel="tooltip" class="btn btn-danger print_receipt">
+                                <i class="fa fa-print"/>
+                            </button>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </section>
+    </t>
+
+</templates>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="products_sort_widget">
+        <div class="oe_status shop_logo" title="Sort By Products">
+            <span class='js_msg oe_hidden'>0</span>
+            <div class="js_connected oe_icon">
+                <img class="logo_shop_header" src="/pos_retail/static/src/icons/sort_by.png" title="Products sort"/>
+            </div>
+        </div>
+    </t>
+
+</templates>

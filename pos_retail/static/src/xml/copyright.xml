@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="copyright_icon_widget">
+        <div class="oe_status js_synch" title="Contact US: thanhchatvn@gmail.com">
+            <span class='js_msg oe_hidden'>0</span>
+            <div class="js_connected oe_icon">
+                <i class='fa fa-copyright' role="img" aria-label="2017 @ TL Technology" title="2017 @ TL Technology"></i>
+            </div>
+        </div>
+    </t>
+
+</templates>

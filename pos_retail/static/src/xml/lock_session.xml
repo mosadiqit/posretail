@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="popup_lock_page">
+        <div class="swal2-container swal2-fade swal2-in" style="overflow-y: auto;">
+            <div class="swal2-modal swal2-show"
+                 style="display: block; width: 500px; padding: 20px; background: rgb(255, 255, 255); min-height: 340px;"
+                 tabindex="-1">
+                <h2><t t-esc=" widget.options.title || 'Confirm' " /></h2>
+                <div class="swal2-content" style="display: block;"><t t-esc="  widget.options.body || '' "/></div>
+                <div class="row" style="padding-bottom: 40px; padding-top: 40px">
+                    <div class="form-group label-floating is-empty">
+                        <input type="password" class="input_form" style="border:1px #c57272 !important; background: #9E9E9E; color: black"/>
+                    </div>
+                </div>
+                <span class="card-issue"/>
+                <div class="form-footer text-center">
+                    <span class="btn btn-success login">login to pos</span>
+                    <span class="btn btn-danger logout">log out</span>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="lock_session_widget">
+        <div class="oe_status js_synch" >
+            <span class='js_msg oe_hidden'>0</span>
+            <div class="js_connected oe_icon">
+                <i class='fa fa-fw fa-unlock oe_green' role="img" aria-label="Lock screen" title="Lock screen, keyboard Event: l"></i>
+            </div>
+            <div class="js_connecting oe_icon oe_hidden">
+                <i style="color: #f44336" class='fa fa-fw fa-lock oe_green' role="img" aria-label="UnLock screen" title="Unlock screen"></i>
+            </div>
+        </div>
+    </t>
+
+</templates>

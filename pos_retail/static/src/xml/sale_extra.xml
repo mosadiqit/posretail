@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="product_sale_extra">
+        <span class='product' t-att-data-sale-extra-id="sale_extra['id']">
+            <div class="product-img-sale-extra">
+                <img t-att-src='image_url' />
+            </div>
+            <span class="price-tag">
+                <t t-esc="widget.format_currency(sale_extra['list_price'], 'Product Price')"/>
+            </span>
+            <div class="product-name">
+                <t t-esc="product['display_name']"/>
+            </div>
+        </span>
+    </t>
+
+</templates>

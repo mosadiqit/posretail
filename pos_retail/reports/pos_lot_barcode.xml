@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_pos_lot_label">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="o">
+                    <t>
+                        <div class="page">
+                            <div class="oe_structure"/>
+                            <div class="row">
+                                <div class="col-8">
+                                    <table class="table table-condensed" style="border-bottom: 0px solid white !important;width: 3in;">
+                                        <tr>
+                                          <th style="text-align: left;">
+                                            <span t-field="o.product_id.display_name"/>
+                                          </th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Number:
+                                                <span t-field="o.name"/>
+                                            </td>
+                                            <td>
+                                                Ean13:
+                                                <span t-field="o.barcode"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center; vertical-align: middle;" class="col-5">
+                                                <img t-if="o.name" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', o.barcode, 600, 150)" style="width:100%;height:20%;"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <report
+            string="POS Lot EAN13 (PDF)"
+            id="action_report_pos_lot_label"
+            model="stock.production.lot"
+            report_type="qweb-pdf"
+            name="pos_retail.report_pos_lot_label"
+            file="pos_retail.report_pos_lot_label"
+            print_report_name="'POS Lot-Serial - %s' % object.barcode"
+        />
+
+    </data>
+</odoo>

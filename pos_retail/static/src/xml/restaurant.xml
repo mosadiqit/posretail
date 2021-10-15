@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="SplitbillButton">
+        <t t-jquery="span[class*='control-button']" t-operation="replace">
+            <div class="left_button" title="Split Order to 2 Order">
+                <div class="button-icon">
+                    <i class="fa fa-cut" style="color: red"/>
+                </div>
+                <div class="button-name">
+                    Split Order
+                </div>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="PrintBillButton">
+        <t t-jquery="span[class*='control-button']" t-operation="replace">
+            <div class="left_button" title="Print Kitchen/Bar Receipt without POSBOX">
+                <div class="button-icon">
+                    <img src="/pos_retail/static/src/icons/bill.png" class="pos_logo"/>
+                </div>
+                <div class="button-name">
+                    Bill
+                </div>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="SubmitOrderButton">
+        <t t-jquery="span[class*='control-button']" t-operation="replace">
+            <div class="left_button" title="Send Bill to Kitchen/Bar">
+                <div class="button-icon">
+                    <img src="/pos_retail/static/src/icons/chef.png" class="pos_logo"/>
+                </div>
+                <div class="button-name">
+                    Order
+                </div>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="TableGuestsButton">
+        <t t-jquery="div[class*='control-button']" t-operation="replace">
+            <div class="left_button" title="Set Guests Number of Order">
+                <div class="button-icon">
+                    <img src="/pos_retail/static/src/icons/clients.png" class="pos_logo"/>
+                </div>
+                <div class="button-name">
+                    Guests <t t-esc="widget.guests()" />
+                </div>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="TransferOrderButton">
+        <t t-jquery="div[class*='control-button']" t-operation="replace">
+            <div class="left_button" title="Transfer selected Order to another Table">
+                <div class="button-icon">
+                    <i class="fa fa-mouse-pointer" style="color: blue"/>
+                </div>
+                <div class="button-name">
+                    Transfer Table
+                </div>
+            </div>
+        </t>
+    </t>
+
+</templates>

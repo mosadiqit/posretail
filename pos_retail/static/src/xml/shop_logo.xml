@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="PosTicket">
+        <t t-jquery="t[t-esc*='widget.pos.company.name']" t-operation="replace">
+            <t t-if="widget.pos.company_logo_base64">
+                <img t-att-src='widget.pos.company_logo_base64' class="shop_logo"
+                     style="max-width: 120px !important;max-height:60px !important; float: right; background: #fff"
+                />
+            </t>
+        </t>
+    </t>
+
+    <t t-name="shop_logo_widget">
+        <t t-if="widget.pos.company_logo_base64">
+            <div class="oe_status shop_logo shop">
+                <img t-att-src='widget.pos.company_logo_base64' class="logo-shop"/>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="popup_change_logo">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y">
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <h4 class="card-title">Your shop logo</h4>
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="form-group label-floating">
+                                                <div class='client-picture'>
+                                                    <t><i class='fa fa-camera'></i></t>
+                                                    <input type='file' class='image-uploader'></input>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-footer text-center">
+                                            <div class="btn btn-success pull-right confirm">
+                                                Change
+                                            </div>
+                                            <div class="btn btn-danger pull-left cancel">
+                                                Close
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

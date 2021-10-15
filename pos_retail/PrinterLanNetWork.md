@@ -1,0 +1,7 @@
+- [x] Download Qz Tray from https://qz.io/download/
+- [x] Install Qz Tray
+- [x] Go to Menu Retailers / Epson Printer / Input printer name and ip address (only ip like: 192.168.1.168)
+- [x] Please made sure ip of printer the same your pos session will use lan network
+------------------------------------------------------
+- [x] Ubuntu: Please install Java 1.7 or higher to continue (sudo apt-get update && sudo apt install openjdk-11-jdk)
+- [x] Install Tray: sudo bash qz-tray-2.0.10.run

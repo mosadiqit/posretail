@@ -1,0 +1,57 @@
+.pos .ribbon {
+    position: initial;
+    left: -5px;
+    top: -5px;
+    z-index: 1;
+    overflow: hidden;
+    width: 75px;
+    text-align: right;
+}
+.pos .ribbon .out_stock span{
+    background: red !important;
+}
+.pos .ribbon .limit_stock span{
+    background: orange !important;
+}
+
+.pos .ribbon span {
+    color: #fff;
+    background: gray;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 20px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(-45deg);
+    width: 127px;
+    font-weight: 400;
+    font-size: 9px;
+    display: block;
+    border-bottom: 1px solid gray;
+    position: absolute;
+    top: 30px;
+    left: -35px;
+}
+
+.pos .ribbon span::before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 100%;
+    z-index: -1;
+    border-left: 3px solid #F44336;
+    border-right: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #F44336;
+}
+
+.pos .ribbon span::after {
+    content: "";
+    position: absolute;
+    right: 0px;
+    top: 100%;
+    z-index: -1;
+    border-left: 3px solid transparent;
+    border-right: 3px solid #F44336;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #F44336;
+}

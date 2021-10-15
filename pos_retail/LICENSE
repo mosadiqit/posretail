@@ -1,0 +1,57 @@
+================================================================
+Odoo Proprietary License v1.0
+
+This software and associated files (the "Software") may only be used (executed,
+modified, executed after modifications) if you have purchased a valid license
+from the authors, typically via Odoo Apps, or if you have received a written
+agreement from the authors of the Software (see the COPYRIGHT file).
+
+You may develop Odoo modules that use the Software as a library (typically
+by depending on it, importing it and using its resources), but without copying
+any source code or material from the Software. You may distribute those
+modules under the license of your choice, provided that this license is
+compatible with the terms of the Odoo Proprietary License (For example:
+LGPL, MIT, or proprietary licenses similar to this one).
+
+It is forbidden to publish, distribute, sublicense, or sell copies of the Software
+or modified copies of the Software.
+
+The above copyright notice and this permission notice must be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+===================
+Giấy phép sở hữu Odoo v1.0
+
+Phần mềm này và các tệp liên quan ("Phần mềm") chỉ có thể được sử dụng (được thực thi,
+sửa đổi, thực hiện sau khi sửa đổi) nếu bạn đã mua một giấy phép hợp lệ
+từ các tác giả, thường là qua Ứng dụng Odoo hoặc nếu bạn đã nhận được một văn bản
+thỏa thuận từ các tác giả của Phần mềm (xem tệp COPYRIGHT).
+
+Bạn có thể phát triển các mô-đun Odoo sử dụng Phần mềm làm thư viện (thông thường
+bằng cách phụ thuộc vào nó, gọi lại nó và sử dụng tài nguyên của nó), nhưng không sao chép
+bất kỳ mã nguồn hoặc tài liệu nào từ Phần mềm. 
+
+Bạn có thể phân phối chúng các mô-đun theo giấy phép bạn chọn, miễn là giấy phép này là
+tương thích Odoo Proprietary License v1.0
+
+Nghiêm cấm xuất bản, phân phối, cấp phép lại hoặc bán các bản sao của Phần mềm
+hoặc sửa đổi các bản sao của Phần mềm.
+
+Thông báo bản quyền ở trên và thông báo cấp phép này phải được bao gồm trong tất cả
+bản sao hoặc các phần quan trọng của Phần mềm.
+
+CÁC PHẦN MỀM ĐƯỢC CUNG CẤP "NHƯ LÀ", KHÔNG BẢO HÀNH CỦA BẤT KỲ LOẠI NÀO, CHÍNH XÁC HOẶC
+NGỤ Ý, BAO GỒM NHƯNG KHÔNG GIỚI HẠN CÁC BẢO HÀNH VỀ KHẢ NĂNG BÁN HÀNG,
+PHÙ HỢP ĐỐI VỚI MỘT MỤC ĐÍCH THAM GIA VÀ KHÔNG GIỚI HẠN.
+
+KHÔNG CÓ TRƯỜNG HỢP TÁC GIẢ HOẶC CHỦ SỞ HỮU BẢN QUYỀN CHỊU TRÁCH NHIỆM CHO BẤT KỲ YÊU CẦU BỒI THƯỜNG
+BỒI THƯỜNG THIỆT HẠI HOẶC TRÁCH NHIỆM PHÁP LÝ KHÁC, CHO DÙ TRONG MỘT HÀNH ĐỘNG HỢP ĐỒNG, SAI LẦM PHÁP LÝ HAY CÁCH KHÁC,
+PHÁT SINH TỪ PHẦN MỀM, TRONG SỐ HOẶC KẾT HỢP VỚI PHẦN MỀM HOẶC SỬ DỤNG HOẶC CÁC
+GIAO DỊCH TRONG PHẦN MỀM.

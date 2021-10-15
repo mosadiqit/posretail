@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="mobile_product_categories">
+        <div class="card categories_list order-scroller touch-scrollable">
+            <div class="card-content">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="mobile_product_category_row">
+        <t t-set="count" t-value="1"/>
+        <t t-foreach="pos_categories || []" t-as="category">
+            <tr class='category_row ' t-att-data-category-id="category.id">
+                <td class="text-left"><t t-esc="count"/>.</td>
+                <td t-attf-class='#{ widget.pos.category_selected == category.id ? "highlight" : ""} '><t t-esc="category.name"/> </td>
+            </tr>
+            <t t-set="count" t-value="count + 1"/>
+        </t>
+    </t>
+
+
+</templates>

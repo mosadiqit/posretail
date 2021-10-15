@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- register payment for pos order not full -->
+    <t t-name="popup_register_payment">
+        <div class="modal-dialog">
+            <div class="popup popup-textinput">
+                <div class="card">
+                    <div class="card-content">
+                        <h4 class="card-title">
+                            <t t-if="widget.options.order">
+                                Register payment of: <t t-esc="widget.options.order.name"/>
+                            </t>
+                        </h4>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="row">
+                                        <label class="label voucher-label">Debit <span class="input-required">(*)</span></label>
+                                        <div class="col-sm-7">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label"></label>
+                                                <input class="form-control field"
+                                                       type="number"
+                                                       name="amount"
+                                                       t-att-value="widget.options.amount_debit"
+                                                       required="true" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="label voucher-label">Payment Reference <span class="input-required">(*)</span></label>
+                                        <div class="col-sm-7">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label"></label>
+                                                <input class="form-control field"
+                                                       type="text"
+                                                       name="payment_reference"
+                                                       required="true" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="label voucher-label">Payment Date <span class="input-required">(*)</span></label>
+                                        <div class="col-sm-7">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label"></label>
+                                                <input class="form-control datepicker field"
+                                                       type="text"
+                                                       name="payment_date"
+                                                       required="true" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="label voucher-label">Payment Mode (Method) <span class="input-required">(*)</span></label>
+                                        <div class="col-sm-7">
+                                            <t t-if="widget.options.cashregisters">
+                                                <select class='form-control voucher-select field' name='journal_id'>
+                                                    <t t-foreach='widget.options.cashregisters' t-as='cashregister'>
+                                                        <option t-att-value='cashregister.journal_id[0]'>
+                                                            <t t-esc='cashregister.journal_id[1]'/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="card-issue"/>
+                                <div class="form-footer text-center">
+                                    <span class="btn confirm">
+                                        <i class="fa fa-check"/> Payment
+                                    </span>
+                                    <span class="btn btn-success payment-full">
+                                        Payment Full
+                                    </span>
+                                    <span class="btn btn-danger cancel">
+                                        Close
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="popup_return_pos_order_lines">
+        <div class="modal-dialog">
+            <div class="swal2-content list-line">
+                <div class="card">
+                    <div class="card-content">
+                        <t t-if="widget.options.order">
+                            <h4 class="card-title">
+                                Return : <t t-esc="widget.options.order.name"/>
+                            </h4>
+                        </t>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <span class="card-issue"/>
+                    <footer>
+                        <div class="card-footer text-center">
+                            <div class="btn btn-success confirm_return_order">
+                                <i class="fa fa-check"/> Confirm return
+                            </div>
+                            <div class="btn btn-success create_voucher">
+                                <i class="fa fa-gift"/> Covert to voucher
+                            </div>
+                            <div class="btn btn-danger cancel">
+                                Close
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="button_go_pos_orders_screen">
+        <div class="left_button" title="Go to POS Orders screen, Screen will display all Orders create by your session">
+            <div class="button-icon">
+                <img src="/pos_retail/static/src/icons/find.png" class="pos_logo"/>
+            </div>
+            <div class="button-name">
+                POS Orders
+            </div>
+        </div>
+    </t>
+
+    <t t-name="return_pos_order_line">
+        <t t-set="count" t-value="1"/>
+        <t t-foreach="order_lines || []" t-as="line">
+            <tr>
+                <td class="text-center"><t t-esc="count"/></td>
+                <td>
+                    <div class="checkbox">
+                        <label>
+                            <input class="line-select" type="checkbox" name="optionsCheckboxes" checked="true" t-att-data-id="line.id">
+                                <span class="checkbox-material"><span class="check"></span></span>
+                            </input>
+                        </label>
+                    </div>
+                </td>
+                <td class="text-left"><t t-esc="line.name"/> </td>
+                <td class="text-right"><t t-esc="widget.format_currency(line.price_unit)"/></td>
+                <td class="text-right qty">
+                    <img class="order_logo" src="/pos_retail/static/src/icons/shopping_cart_header.png"/><t t-esc="line.qty"/></td>
+                <td class="qty_minus" t-if="line.qty > 1" t-att-data-id="line.id">
+                    <div class="button-icon">
+                        <img src="/pos_retail/static/src/icons/minus.png" class="right_pane_logo"/>
+                    </div>
+                </td>
+                <td class="qty_plus" t-att-data-id="line.id">
+                    <div class="button-icon">
+                        <img src="/pos_retail/static/src/icons/plus.png" class="right_pane_logo"/>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <span class="price">
+                        <t t-esc="widget.format_currency(line.price_subtotal_incl)"/>
+                    </span>
+                </td>
+            </tr>
+            <t t-set="count" t-value="count + 1"/>
+        </t>
+    </t>
+
+    <t t-name="pos_orders_screen">
+        <div class="clientlist-screen screen">
+            <div class="full_width screen-content">
+                <section class="top-content">
+                    <span class='button back'>
+                        <i class='fa fa-angle-double-left'/>
+                        Back
+                    </span>
+                    <span class='searchbox search-pos-order'>
+                        <input placeholder='Find POS Order' />
+                        <span class='search-clear'/>
+                    </span>
+                    <span class="button button_sync">
+                        Sync
+                        <i class="fa fa-refresh"></i>
+                    </span>
+                    <span class='button button-top-right highlight only_partial_payment_orders'>
+                        Only Partial orders
+                        <i class='fa fa-info'></i>
+                    </span>
+                </section>
+                <section class="full-content">
+                    <div class='window'>
+                        <section class='subwindow collapsed'>
+                            <div class='subwindow-container collapsed'>
+                                <div class='subwindow-container-fix pos_detail'>
+                                </div>
+                            </div>
+                        </section>
+                        <section class='subwindow'>
+                            <div class='subwindow-container'>
+                                <div class='subwindow-container-fix touch-scrollable scrollable-y'>
+                                    <table class='client-list'>
+                                        <thead>
+                                            <tr>
+                                                <th><a href="#" class="sort sort_by_pos_order_id">ID</a></th>
+                                                <th><a href="#" class="sort sort_by_date_order">Date</a></th>
+                                                <th><a href="#" class="sort sort_by_pos_order_name">Name</a></th>
+                                                <th><a href="#" class="sort sort_by_pos_reference">Ref</a></th>
+                                                <th><a href="#" class="sort sort_by_pos_order_barcode">Barcode</a></th>
+                                                <th><a href="#" class="sort sort_by_pos_order_sale_person">Sale Person</a></th>
+                                                <th><a href="#" class="sort sort_by_pos_order_partner_name">Partner</a></th>
+                                                <th><a href="#" class="sort sort_by_pos_order_amount_total">Total</a></th>
+                                                <th><a href="#" class="sort sort_by_pos_order_amount_paid">Paid</a></th>
+                                                <th><a href="#" class="sort sort_by_pos_order_amount_tax">Tax</a></th>
+                                                <th><a href="#">Debit</a></th>
+                                                <th><a href="#" class="sort sort_by_pos_order_state">State</a></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class='client-list-contents pos_order_list'>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="pos_order_lines">
+        <section class='subwindow'>
+            <div class='subwindow-container'>
+                <div class='subwindow-container-fix touch-scrollable scrollable-y'>
+                    <table class='client-list'>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Sub total</th>
+                            </tr>
+                        </thead>
+                        <tbody class='client-list-contents'>
+                            <t t-foreach='lines' t-as='line'>
+                                <tr class='client-line' t-att-data-id='line.id'>
+                                    <td><t t-esc='line.product_id[1]'/></td>
+                                    <td><t t-esc='line.qty'/></td>
+                                    <td><t t-esc='widget.format_currency(line.price_unit)'/></td>
+                                    <td><t t-esc='widget.format_currency(line.price_subtotal_incl)'/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </t>
+
+    <t t-name="pos_order_row">
+        <tr class='client-line pos_order_row' t-att-data-id='order.id'>
+            <td><t t-esc='order.id'/></td>
+            <td><t t-esc='order.date_order'/></td>
+            <td><t t-esc='order.name'/></td>
+            <td><t t-esc='order.pos_reference'/></td>
+            <td><t t-esc='order.ean13'/></td>
+            <td><t t-esc='order.sale_person'/></td>
+            <td>
+                <t t-if="order.partner">
+                    <t t-esc='order.partner.name'/>
+                </t>
+                <t t-if="!order.partner">
+                    N/A
+                </t>
+            </td>
+            <td><t t-esc='widget.format_currency(order.amount_total)'/></td>
+            <td><t t-esc='widget.format_currency(order.amount_paid)'/></td>
+            <td><t t-esc='widget.format_currency(order.amount_tax)'/></td>
+            <td><t t-esc='widget.format_currency(order.amount_total - order.amount_paid)'/></td>
+            <td>
+                <t t-if="order.state == 'draft'">Draft</t>
+                <t t-if="order.state == 'cancel'">Cancelled</t>
+                <t t-if="order.state == 'paid'">Paid</t>
+                <t t-if="order.state == 'done'">Posted</t>
+                <t t-if="order.state == 'invoiced'">Invoiced</t>
+                <t t-if="order.state == 'partial_payment'">Partial Payment</t>
+            </td>
+        </tr>
+    </t>
+
+    <t t-name="pos_order_detail">
+        <section class='touch-scrollable scrollable-y client-details' style="max-height: 600px;min-height: 300px;height: fit-content;">
+            <t t-if="order.partner_id">
+                <div class='client-picture'>
+                    <img t-att-src='widget.partner_icon_url(order.partner_id[0])' />
+                </div>
+            </t>
+            <div class='client-name'>
+                <t t-if="order.name">
+                    <t t-esc="order.name"/>
+                </t>
+                <t t-if="!order.name">
+                    N/A
+                </t>
+            </div>
+            <div class='client-details-box clearfix'>
+                <div class='client-details-left'>
+                    <t t-if="order.partner">
+                        <div class='client-detail'>
+                            <span class='label'>Customer</span>
+                            <t t-esc="order.partner.name"/>
+                        </div>
+                        <t t-if="order.partner.email">
+                            <div class='client-detail'>
+                                <span class='label'>Email</span>
+                                <t t-esc="order.partner.email"/>
+                            </div>
+                        </t>
+                        <t t-if="order.partner.phone || order.partner.mobile">
+                            <div class='client-detail'>
+                                <span class='label'>Phone/Mobile</span>
+                                <t t-esc="order.partner.phone || order.partner.mobile"/>
+                            </div>
+                        </t>
+                    </t>
+                    <div class='client-detail'>
+                        <span class='label'>Ref</span>
+                        <t t-esc='order.pos_reference'/>
+                    </div>
+                    <div class='client-detail'>
+                        <span class='label'>Ean13</span>
+                        <t t-esc='order.ean13'/>
+                    </div>
+                    <div class='client-detail'>
+                        <span class='label'>Date</span>
+                        <t t-esc='order.date_order'/>
+                    </div>
+                    <div class='client-detail'>
+                        <span class='label'>Order Lines</span>
+                        <div class='lines_detail'/>
+                    </div>
+                </div>
+                <div class='client-details-right'>
+                    <div class='client-detail'>
+                        <t t-if="order.state == 'draft' or order.state == 'partial_payment'">
+                            <span class='label'>Register Amount</span>
+                            <button style="width: 120px; height:45px" type="button" class="btn btn-success register_amount">
+                                <i class="fa fa-plus"/>
+                            </button>
+                        </t>
+                    </div>
+                    <div class='client-detail'>
+                        <t t-if="order.state == 'paid' and order.partner">
+                            <span class='label'>Create Invoice</span>
+                            <button type="button" class="btn btn-info button_form create_invoice">
+                                <i class="fa fa-money"/>
+                            </button>
+                        </t>
+                    </div>
+                    <div class='client-detail'>
+                        <span class='label'>Print Receipt</span>
+                        <button type="button" rel="tooltip" class="btn btn-success button_form reprint_order">
+                            <i class="fa fa-print"/>
+                        </button>
+                    </div>
+                    <div class='client-detail'>
+                        <t t-if="order.state != 'draft' and widget.pos.config.return_products">
+                            <span class='label'>Return Order</span>
+                            <button type="button" class="btn btn-danger button_form return_order">
+                                <i class="fa fa-angle-double-left"/>
+                            </button>
+                        </t>
+                    </div>
+                    <div class='client-detail'>
+                        <span class='label'>Open Order</span>
+                        <a class='so_link' target='_blank' t-att-href="order.link">(Click here)</a>
+                    </div>
+                    <div class='client-detail state'>
+                        <span class='label'>State</span>
+                        <t t-if="order.state == 'draft'">Draft</t>
+                        <t t-if="order.state == 'cancel'">Cancelled</t>
+                        <t t-if="order.state == 'paid'">Paid</t>
+                        <t t-if="order.state == 'done'">Posted</t>
+                        <t t-if="order.state == 'invoiced'">Invoiced</t>
+                        <t t-if="order.state == 'partial_payment'">Partial Payment</t>
+                        <t t-if="order.state == 'booked'">Booked on POS</t>
+                    </div>
+                    <div class='client-detail state'>
+                        <span class='label'>Total</span>
+                        <t t-esc='widget.format_currency(order.amount_total)'/>
+                    </div>
+                    <div class='client-detail state'>
+                        <span class='label'>Tax</span>
+                        <t t-esc='widget.format_currency(order.amount_tax)'/>
+                    </div>
+                    <div class='client-detail state'>
+                        <span class='label'>Paid</span>
+                        <t t-esc='widget.format_currency(order.amount_paid)'/>
+                    </div>
+                    <div class='client-detail state'>
+                        <span class='label'>Debit</span>
+                        <t t-esc='widget.format_currency(order.amount_total - order.amount_paid)'/>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </t>
+
+
+</templates>

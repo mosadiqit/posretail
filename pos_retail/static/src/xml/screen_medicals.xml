@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="medical_insurance_screen">
+        <div class="clientlist-screen screen">
+            <div class="full_width screen-content">
+                <section class="top-content">
+                    <span class='button back' style="background: none">
+                        <img src="/pos_retail/static/src/icons/back.png" class="button_logo"/>
+                    </span>
+                    <span class='searchbox search-product' style="top:4px">
+                        <input placeholder='Find medical insurance' />
+                        <span class='search-clear'></span>
+                    </span>
+                    <span class='searchbox'></span>
+                    <span class='button new_medical' style="background: none; left:58%">
+                        <img src="/pos_retail/static/src/icons/plus.png" class="button_logo"/>
+                    </span>
+                </section>
+                <section class="full-content">
+                    <div class='window'>
+                        <section class='subwindow collapsed'>
+                            <div class='subwindow-container collapsed'>
+                                <div class='subwindow-container-fix client-details-contents'>
+                                </div>
+                            </div>
+                        </section>
+                        <section class='subwindow' style="padding-top: 30px">
+                            <div class='subwindow-container'>
+                                <div class='subwindow-container-fix touch-scrollable scrollable-y'>
+                                    <table class='client-list'>
+                                        <thead>
+                                            <tr>
+                                                <th>Insurance Company</th>
+                                                <th>Subscriber</th>
+                                                <th>Patient name</th>
+                                                <th>Patient number</th>
+                                                <th>Medical number</th>
+                                                <th>Employee</th>
+                                                <th>Tell</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class='client-list-contents medical_insurances'>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="medical_insurance_row">
+        <tr class='medical_insurance' t-att-data-id='insurance.id'>
+            <td>
+                <t t-esc='insurance.insurance_company_id[1]' />
+            </td>
+            <td>
+                <t t-if="insurance.subscriber_id"><t t-esc='insurance.subscriber_id[1]' /></t>
+            </td>
+            <td><t t-esc='insurance.patient_name' /></td>
+            <td><t t-esc='insurance.patient_number' /></td>
+            <td><t t-esc='insurance.medical_number' /></td>
+            <td><t t-esc='insurance.employee' /></td>
+            <td>
+                <t t-if="insurance.phone"><t t-esc='insurance.phone' /></t>
+            </td>
+        </tr>
+    </t>
+
+    <t t-name="medical_insurance_edit">
+        <section class='touch-scrollable scrollable-y client-details'>
+            <div class='client-details-box clearfix'>
+                <div class='client-details-left'>
+                    <t t-if="insurance">
+                        <div class='client-detail' hidden="hidden" disabled="disabled">
+                            <span class='label'>ID</span>
+                            <input class="form-control detail" type="number" t-att-value="insurance.id" name="id" hidden="hidden" disabled="disabled"/>
+                        </div>
+                        <div class='client-detail'>
+                            <span class='label'>Insurance company <span class="input-required"> (*)</span></span>
+                            <t t-if="insurance and insurance.insurance_company_id">
+                                <select class='form-control detail' name='insurance_company_id'>
+                                    <t t-foreach='widget.insurance_companies' t-as='insurance_company'>
+                                        <option t-att-value='insurance_company.id' t-att-selected="insurance_company.id ? ((insurance.insurance_company_id[0] === insurance_company['id']) ? true : undefined) : undefined">
+                                            <t t-esc='insurance_company.name'/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </t>
+                            <t t-if="!insurance or !insurance.insurance_company_id">
+                                <select class='form-control detail' name='insurance_company_id'>
+                                    <t t-foreach='widget.insurance_companies' t-as='insurance_company'>
+                                        <option t-att-value='insurance_company.id'>
+                                            <t t-esc='insurance_company.name'/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </t>
+                        </div>
+                        <div class='client-detail'>
+                            <span class='label'>Subscriber</span>
+                            <t t-if="insurance and insurance.subscriber_id">
+                                <select class='form-control detail' name='subscriber_id'>
+                                    <t t-foreach='widget.pos.partners' t-as='partner'>
+                                        <option t-att-value='partner.id' t-att-selected="partner.id ? ((insurance.subscriber_id[0] === partner['id']) ? true : undefined) : undefined">
+                                            <t t-esc='partner.name'/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </t>
+                            <t t-if="!insurance or !insurance.subscriber_id">
+                                <select class='form-control detail' name='subscriber_id'>
+                                    <t t-foreach='widget.pos.partners' t-as='partner'>
+                                        <option t-att-value='partner.id'>
+                                            <t t-esc='partner.name'/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </t>
+                        </div>
+                        <div class='client-detail'>
+                            <span class='label'>Patient name <span class="input-required"> (*)</span></span>
+                            <input class='form-control detail' name='patient_name' t-att-value='insurance.patient_name || ""'></input>
+                        </div>
+                        <div class='client-detail'>
+                            <span class='label'>Patient number <span class="input-required"> (*)</span></span>
+                            <input class='form-control detail' name='patient_number' t-att-value='insurance.patient_number || ""'></input>
+                        </div>
+                        <div class='client-detail'>
+                            <span class='label'>Medical number <span class="input-required"> (*)</span></span>
+                            <input class='form-control detail' name='medical_number' t-att-value='insurance.medical_number || ""'></input>
+                        </div>
+                    </t>
+                    <t t-if="!insurance">
+                        <div class='client-detail'>
+                            <span class='label'>Insurance company <span class="input-required"> (*)</span></span>
+                            <select class='form-control detail' name='insurance_company_id'>
+                                <t t-foreach='widget.insurance_companies' t-as='insurance_company'>
+                                    <option t-att-value='insurance_company.id'>
+                                        <t t-esc='insurance_company.name'/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class='client-detail'>
+                            <span class='label'>Subscriber</span>
+                            <select class='form-control detail' name='subscriber_id'>
+                                <t t-foreach='widget.pos.partners' t-as='partner'>
+                                    <option t-att-value='partner.id'>
+                                        <t t-esc='partner.name'/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class='client-detail'>
+                            <span class='label'>Patient name <span class="input-required"> (*)</span></span>
+                            <input class='form-control detail' name='patient_name'></input>
+                        </div>
+                        <div class='client-detail'>
+                            <span class='label'>Patient number <span class="input-required"> (*)</span></span>
+                            <input class='form-control detail' name='patient_number'></input>
+                        </div>
+                    </t>
+                    <t t-if="!insurance">
+                        <div class='client-detail'>
+                            <span class='label'>Medical number <span class="input-required"> (*)</span></span>
+                            <input class='form-control detail' name='medical_number'></input>
+                        </div>
+                    </t>
+                </div>
+                <div class='client-details-right'>
+                    <t t-if="!insurance">
+                        <div class='client-detail'>
+                            <span class='label'>Employee</span>
+                            <input class='form-control detail' name='employee'></input>
+                        </div>
+                        <div class='client-detail'>
+                            <span class='label'>Tell number</span>
+                            <input class='form-control detail' name='phone'></input>
+                        </div>
+                        <div class='client-detail'>
+                            <span class='label'>Rate <span class="input-required"> (*)</span></span>
+                            <input class='form-control detail' type='number' name='rate'></input>
+                        </div>
+                    </t>
+                    <t t-if="insurance">
+                        <div class='client-detail'>
+                            <span class='label'>Employee</span>
+                            <input class='form-control detail' name='employee' t-att-value='insurance.employee || ""'></input>
+                        </div>
+                        <div class='client-detail'>
+                            <span class='label'>Tell number</span>
+                            <input class='form-control detail' name='phone' t-att-value='insurance.phone || ""'></input>
+                        </div>
+                        <div class='client-detail'>
+                            <span class='label'>Rate <span class="input-required"> (*)</span></span>
+                            <input class='form-control detail' type='number' name='rate' t-att-value='insurance.rate || ""'></input>
+                        </div>
+                    </t>
+                    <div class="client-detail state" style="float:right">
+                        <t t-if="insurance">
+                            <span class="left_button deselected_insurance">
+                                <div class="button-icon">
+                                    <img class="pos_logo" src="/pos_retail/static/src/icons/trash.png"/>
+                                </div>
+                                <div class="button-name">
+                                    Deselected
+                                </div>
+                            </span>
+                            <span class="left_button print_medical_insure_card">
+                                <div class="button-icon">
+                                    <img class="pos_logo" src="/pos_retail/static/src/icons/printer.png"/>
+                                </div>
+                                <div class="button-name">
+                                    Print card
+                                </div>
+                            </span>
+                            <span class="left_button select_insurance">
+                                <div class="button-icon">
+                                    <img class="pos_logo" src="/pos_retail/static/src/icons/confirm.png"/>
+                                </div>
+                                <div class="button-name">
+                                    Select
+                                </div>
+                            </span>
+                        </t>
+                        <span class="left_button save">
+                            <div class="button-icon">
+                                <img class="pos_logo" src="/pos_retail/static/src/icons/save.png"/>
+                            </div>
+                            <div class="button-name">
+                                Save
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </t>
+
+    <t t-name="medical_insurance_card">
+        <receipt align='center' width='40' value-thousands-separator='' >
+            <div><h2>Medical Insurance Card</h2></div>
+            <br/>
+            <line>
+                <left>Insurance company: </left>
+                <right><t t-esc='insurance.insurance_company_id[1]' /></right>
+            </line>
+            <line>
+                <left>Patient number: </left>
+                <right><t t-esc='insurance.patient_number' /></right>
+            </line>
+            <line>
+                <left>Patient name: </left>
+                <right><t t-esc='insurance.patient_name' /></right>
+            </line>
+            <line>
+                <left>Rate: </left>
+                <right><t t-esc='insurance.rate' /> % </right>
+            </line>
+            <line>
+                <left>Patient name: </left>
+                <right><t t-esc='insurance.patient_name' /></right>
+            </line>
+            <line>
+                <left>Medical number: </left>
+                <right><t t-esc='insurance.medical_number' /></right>
+            </line>
+            <line>
+                <left>Employee: </left>
+                <right><t t-esc='insurance.employee' /></right>
+            </line>
+            <line>
+                <left>Tell number: </left>
+                <right><t t-esc='insurance.phone' /></right>
+            </line>
+            <right>
+                <barcode encoding="ean13"><t t-esc='insurance.code'/></barcode>
+            </right>
+        </receipt>
+    </t>
+
+</templates>

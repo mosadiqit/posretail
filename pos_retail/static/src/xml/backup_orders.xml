@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="BackUpOrdersWidget">
+        <div class="oe_status backup_icon" title="Backup/Restore Orders">
+            <img src="/pos_retail/static/src/icons/cloud.png" class="logo_shop_header"/>
+        </div>
+    </t>
+
+    <t t-name="popup_backup_orders">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y" style="max-height: 600px;min-height: 300px;height: fit-content;">
+                <div class="card">
+                    <div class="card-content">
+                        <h4 class="card-title">
+                            Please choose method restore/backup Orders
+                        </h4>
+                        <div class="table-responsive">
+                            <div class='body'>
+                                <span class='left_button backup_orders_via_file' style="width: 45%">
+                                    <div class="button-icon">
+                                        <img src="/pos_retail/static/src/icons/cloud.png" class="pos_logo"/>
+                                    </div>
+                                    <div class="button-name">
+                                        Backup to JSON
+                                    </div>
+                                </span>
+                                <span class='left_button restore_orders' style="width: 45%">
+                                    <div class="button-icon">
+                                        <img src="/pos_retail/static/src/icons/backup.png" class="pos_logo"/>
+                                    </div>
+                                    <div class="button-name">
+                                        Restore via JSON
+                                        <input class='form-input' type="file" style="opacity: 0;
+                                            position: unset;
+                                            top: 0;
+                                            left: 0;
+                                            background: aqua;
+                                            right: 0;
+                                            bottom: 0;
+                                            height: 100px;
+                                            width: 100%;
+                                            margin: 0;
+                                            cursor: pointer;
+                                            margin-top: -70px;
+                                        }"/>
+                                    </div>
+                                </span>
+                                <span class='left_button backup_orders_via_backend'  style="width: 45%">
+                                    <div class="button-icon">
+                                        <img src="/pos_retail/static/src/icons/cloud.png" class="pos_logo"/>
+                                    </div>
+                                    <div class="button-name">
+                                        Backup to backend
+                                    </div>
+                                </span>
+                                <span class='left_button restore_orders_via_backend' style="width: 45%">
+                                    <div class="button-icon">
+                                        <img src="/pos_retail/static/src/icons/backup.png" class="pos_logo"/>
+                                    </div>
+                                    <div class="button-name">
+                                        Restore via backend
+                                    </div>
+                                </span>
+                                <span class='left_button backup_pending_order' style="width: 45%">
+                                    <div class="button-icon">
+                                        <img src="/pos_retail/static/src/icons/cloud.png" class="pos_logo"/>
+                                    </div>
+                                    <div class="button-name">
+                                        Backup pending order
+                                    </div>
+                                </span>
+                                <span class='left_button restore_pending_order' style="width: 45%">
+                                    <div class="button-icon">
+                                        <img src="/pos_retail/static/src/icons/backup.png" class="pos_logo"/>
+                                    </div>
+                                    <div class="button-name">
+                                        Restore pending order
+                                        <input class='form-input' type="file" style="opacity: 0;
+                                            position: unset;
+                                            top: 0;
+                                            left: 0;
+                                            background: aqua;
+                                            right: 0;
+                                            bottom: 0;
+                                            height: 100px;
+                                            width: 100%;
+                                            margin: 0;
+                                            cursor: pointer;
+                                            margin-top: -70px;
+                                        }"/>
+                                    </div>
+                                </span>
+                                <a>
+                                    <li class="download_backup_orders oe_hidden">
+                                        Download Backup file
+                                    </li>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-footer text-center">
+                    <div class="btn btn-danger close">
+                         Close
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

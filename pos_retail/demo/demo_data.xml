@@ -1,0 +1,158 @@
+<odoo>
+    <data noupdate="0">
+
+        <record id="pos_partner_01" model="res.partner">
+            <field name="name">Ipad 01</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="email">ip2@mail.com</field>
+        </record>
+
+        <record id="pos_user_01" model="res.users">
+            <field name="partner_id" ref="pos_partner_01"/>
+            <field name="login">ip1@mail.com</field>
+            <field name="password">ip1</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="groups_id" eval="[(4, ref('base.group_user')), (4,ref('point_of_sale.group_pos_manager')), (4, ref('sales_team.group_sale_manager')), (4, ref('purchase.group_purchase_manager'))]"/>
+            <field name="pos_security_pin">11</field>
+        </record>
+
+        <record id="pos_config_01" model="pos.config">
+            <field name="name">Ipad 01</field>
+            <field name="user_id" ref="pos_user_01"/>
+            <field name="sync_multi_session">True</field>
+        </record>
+
+        <record id="pos_user_01" model="res.users">
+            <field name="pos_config_id" ref="pos_config_01"/>
+        </record>
+
+        <!-- session 02 -->
+        <record id="pos_partner_02" model="res.partner">
+            <field name="name">Ipad 02</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="email">ip2@mail.com</field>
+        </record>
+
+        <record id="pos_user_02" model="res.users">
+            <field name="partner_id" ref="pos_partner_02"/>
+            <field name="login">ip2@mail.com</field>
+            <field name="password">ip2</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="groups_id" eval="[(4, ref('base.group_user')), (4,ref('point_of_sale.group_pos_manager')), (4, ref('sales_team.group_sale_manager')), (4, ref('purchase.group_purchase_manager'))]"/>
+            <field name="pos_security_pin">22</field>
+        </record>
+
+        <record id="pos_config_02" model="pos.config">
+            <field name="name">Ipad 02</field>
+            <field name="user_id" ref="pos_user_02"/>
+            <field name="sync_multi_session">True</field>
+        </record>
+
+        <record id="pos_user_02" model="res.users">
+            <field name="pos_config_id" ref="pos_config_02"/>
+        </record>
+
+        <!-- session customer screen -->
+        <record id="pos_partner_05" model="res.partner">
+            <field name="name">Customer Screen</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="email">cs1@mail.com</field>
+        </record>
+
+        <record id="pos_user_05" model="res.users">
+            <field name="partner_id" ref="pos_partner_05"/>
+            <field name="login">cs1@mail.com</field>
+            <field name="password">cs1</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="groups_id" eval="[(4, ref('base.group_user')), (4,ref('point_of_sale.group_pos_manager')), (4, ref('sales_team.group_sale_manager')), (4, ref('purchase.group_purchase_manager'))]"/>
+            <field name="pos_security_pin">55</field>
+        </record>
+
+
+        <record id="pos_config_05" model="pos.config">
+            <field name="name">Customer screen</field>
+            <field name="user_id" ref="pos_user_05"/>
+            <field name="sync_multi_session">True</field>
+            <field name="is_customer_screen">True</field>
+            <field name="delay">3000</field>
+            <field name="slogan">welcome to shop</field>
+        </record>
+
+        <record id="pos_user_05" model="res.users">
+            <field name="pos_config_id" ref="pos_config_05"/>
+        </record>
+
+
+        <record id="quickly_payment_000" model="pos.quickly.payment">
+            <field name="name">10 USD</field>
+            <field name="amount">10</field>
+        </record>
+
+        <record id="quickly_payment_001" model="pos.quickly.payment">
+            <field name="name">20 USD</field>
+            <field name="amount">20</field>
+        </record>
+
+        <record id="quickly_payment_01" model="pos.quickly.payment">
+            <field name="name">50 USD</field>
+            <field name="amount">50</field>
+        </record>
+
+        <record id="quickly_payment_02" model="pos.quickly.payment">
+            <field name="name">100 USD</field>
+            <field name="amount">100</field>
+        </record>
+
+        <record id="pos_config_image_01" model="pos.config.image">
+            <field name="name">Image 1</field>
+            <field name="image" type="base64" file="pos_retail/demo/1.jpg"/>
+            <field name="config_id" ref="pos_config_05"/>
+        </record>
+
+        <record id="pos_config_image_02" model="pos.config.image">
+            <field name="name">Image 2</field>
+            <field name="image" type="base64" file="pos_retail/demo/3.jpg"/>
+            <field name="config_id" ref="pos_config_05"/>
+        </record>
+
+        <record id="pos_config_image_03" model="pos.config.image">
+            <field name="name">Image 3</field>
+            <field name="image" type="base64" file="pos_retail/demo/3.jpg"/>
+            <field name="config_id" ref="pos_config_05"/>
+        </record>
+
+        <record id="pos_config_image_04" model="pos.config.image">
+            <field name="name">Image 4</field>
+            <field name="image" type="base64" file="pos_retail/demo/4.jpg"/>
+            <field name="config_id" ref="pos_config_05"/>
+        </record>
+
+        <record id="pos_tag1" model="pos.tag">
+            <field name="name">Tag 1</field>
+        </record>
+
+        <record id="pos_tag2" model="pos.tag">
+            <field name="name">Tag 2</field>
+        </record>
+
+        <record id="pos_tag3" model="pos.tag">
+            <field name="name">Tag 3</field>
+        </record>
+
+        <record id="pos_note1" model="pos.note">
+            <field name="name">Note 1</field>
+        </record>
+
+        <record id="pos_note3" model="pos.note">
+            <field name="name">Note 2</field>
+        </record>
+
+        <record id="pos_note3" model="pos.note">
+            <field name="name">Note 3</field>
+        </record>
+
+    </data>
+</odoo>

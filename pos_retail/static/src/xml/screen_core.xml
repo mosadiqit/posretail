@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="OrderSelectorWidget">
+        <t t-jquery="div[class*='order-selector']" t-operation="replace">
+            <div class="order-selector">
+                <span class="order-button square neworder-button" title="Add New Order, Keyboard Event: n">
+                    <i class='fa fa-plus' role="img" aria-label="New order" title="New order"/>
+                </span>
+                <span class="order-button square deleteorder-button" title="Remove Current Order, Keyboard Event: r">
+                    <i class='fa fa-minus' role="img" aria-label="Delete order" title="Delete order"/>
+                </span>
+                <span class="orders touch-scrollable">
+                    <t t-foreach="widget.pos.get_order_list()" t-as="order">
+                        <t t-set='selected_order' t-value='widget.pos.get_order'/>
+                        <t t-if='order === widget.pos.get_order()'>
+                            <span class="order-button select-order selected" t-att-data-uid="order.uid">
+                                <span class='order-sequence'>
+                                    <t t-esc='order.sequence_number' />
+                                </span>
+                                <t t-esc="moment(order.creation_date).format('hh:mm')"/>
+                                <t t-if="order.seller">
+                                    <span class="seller_name">
+                                        <t t-esc="order['seller']['name']"/>
+                                    </span>
+                                </t>
+                            </span>
+                        </t>
+                        <t t-if='order !== widget.pos.get_order()'>
+                            <span class="order-button select-order" t-att-data-uid="order.uid">
+                                <span class='order-sequence'>
+                                    <t t-esc='order.sequence_number' />
+                                </span>
+                                <t t-if="order.seller">
+                                    <span class="seller_name">
+                                        <t t-esc="order['seller']['name']"/>
+                                    </span>
+                                </t>
+                            </span>
+                        </t>
+                    </t>
+                </span>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="customer_screen">
+        <div class="swiper-container gallery-top">
+            <div class="swiper-wrapper">
+                <t t-foreach="images" t-as="image">
+                    <div class="swiper-slide" t-att-style="image.image_url">
+                        <t t-if="image.name">
+                            <li><t t-esc="image.name"/></li>
+                        </t>
+                        <t t-if="image.description">
+                            <li><t t-esc="image.description"/></li>
+                        </t>
+                    </div>
+                </t>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-scrollbar"></div>
+        </div>
+        <div class="swiper-container gallery-thumbs">
+            <div class="swiper-wrapper">
+                <t t-foreach="images" t-as="image">
+                    <div class="swiper-slide" t-att-style="image.image_url">
+                        <li><t t-esc="image.name"/></li>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="user_card_xml">
+        <receipt align='center' width='40' value-thousands-separator='' >
+            <t t-if='company.logo'>
+                <img t-att-src='company.logo' />
+                <br/>
+            </t>
+            <t t-if='!company.logo'>
+                <h1><t t-esc='company.name' /></h1>
+                <br/>
+            </t>
+            <t t-if='company.website'>
+                Website: <t t-esc='company.website' />
+                <br/>
+            </t>
+            <t t-if='company.phone'>
+                Phone: <t t-esc='company.phone' />
+                <br/>
+            </t>
+            <t t-if='company.email'>
+                Email: <t t-esc='company.email' />
+                <br/>
+            </t>
+            <div font='b'>
+                <t>
+                    <left>
+                        <t t-esc="user.name"/>
+                    </left>
+                    <cennter>
+                        <t t-esc="user.email"/>
+                    </cennter>
+                    <right>
+                        <barcode encoding="ean13"><t t-esc='user.barcode'/></barcode>
+                    </right>
+                </t>
+            </div>
+        </receipt>
+    </t>
+
+    <t t-name="ReviewReceiptScreen">
+        <div class='receipt-screen screen'>
+            <div class='full_width screen-content'>
+                <div class='top-content'>
+                    <span class='button back'>
+                        Back
+                        <i class='fa fa-angle-double-left'></i>
+                    </span>
+                </div>
+                <div class="centered-content touch-scrollable">
+                    <div class="btn btn-default button print">
+                        <i class='fa fa-print'></i> Print Receipt
+                    </div>
+                    <div class="pos-receipt-container">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="pos_ticket_review">
+        <div class="pos-sale-ticket">
+            <t>
+                <img id="barcode" class="barcode_receipt"/>
+            </t>
+            <div class="pos-center-align"><t t-esc="order.formatted_validation_date"/> <t t-esc="order.name"/></div>
+            <br />
+            <t t-esc="widget.pos.company.name"/><br />
+            <div class="receipt-phone">
+                Phone: <t t-esc="widget.pos.company.phone || ''"/><br />
+            </div>
+            <div class="receipt-user">
+                User: <t t-esc="widget.pos.get_cashier().name"/><br />
+            </div>
+            <br />
+            <t t-if="receipt.header">
+                <div style='text-align:center'>
+                    <t t-esc="receipt.header" />
+                </div>
+                <br />
+            </t>
+            <table class='receipt-orderlines'>
+                <colgroup>
+                    <t t-if="widget.pos.config.receipt_without_payment_template !== 'display_price'">
+                        <col width='70%' />
+                        <col width='30%' />
+                    </t>
+                    <t t-if="widget.pos.config.receipt_without_payment_template == 'display_price'">
+                        <col width='50%' />
+                        <col width='25%' />
+                        <col width='25%' />
+                    </t>
+                </colgroup>
+                <tr t-foreach="orderlines" t-as="orderline">
+                    <td>
+                        <t t-esc="orderline.get_product().display_name"/>
+                         <t t-if="orderline.get_discount() > 0">
+                            <div>
+                                With a <t t-esc="orderline.get_discount()"/>% discount
+                            </div>
+                        </t>
+                    </td>
+                    <td class="pos-right-align">
+                        <t t-esc="orderline.get_quantity_str_with_unit()"/>
+                    </td>
+                    <t t-if="widget.pos.config.receipt_without_payment_template == 'display_price'">
+                        <td class="pos-right-align">
+                            <t t-esc="widget.format_currency(orderline.get_display_price())"/>
+                        </td>
+                    </t>
+                </tr>
+            </table>
+            <br />
+            <t t-if="receipt.footer">
+                <br />
+                <div style='text-align:center'>
+                    <t t-esc="receipt.footer" />
+                </div>
+            </t>
+        </div>
+    </t>
+
+</templates>

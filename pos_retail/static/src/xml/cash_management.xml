@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="button_cash_management">
+        <span class="left_button session">
+            <div class="button-icon">
+                <img src="/pos_retail/static/src/icons/cashbox.png" class="pos_logo"/>
+            </div>
+            <div class="button-name">
+                Cash Management
+            </div>
+        </span>
+    </t>
+
+    <t t-name="popup_balance">
+	    <div class="modal-dialog clientlist-screen">
+            <div class="popup balance-popup touch-scrollable scrollable-y" style="max-height: 600px;min-height: 300px">
+                <t t-if="widget.options.title">
+                    <p class="title"><t t-esc=" widget.options.title || '' " /></p>
+                </t>
+                <t t-if="widget.options.body">
+                    <p class="body"><t t-esc=" widget.options.body || '' " /></p>
+                </t>
+              	<div class='session-balance'>
+					<t t-if="widget.options.pos_cashbox_line">
+			        	<table class="client-list" id="cashbox-grid">
+			                <thead>
+		                	 	<th>Coin/Bill Value</th>
+				                <th>Number of Coins/Bills</th>
+				                <th>SubTotal</th>
+				                <th></th>
+		                	</thead>
+		                	<tbody class="client-list-contents">
+		              			<t t-set="i" t-value="0" />
+				                <t t-foreach='widget.options.pos_cashbox_line' t-as='cashbox'>
+			                        <tr t-att-id="i">
+			                             <td style="display:none;">
+			                             	<t t-esc="cashbox.id" />
+			                             </td>
+			                             <td>
+				                         	<input class="cashbox-edit" name='coin_value' type="text" t-att-value="cashbox.coin_value" t-att-id='"cashbox_" + i + "_coin_value"'></input>
+				                         </td>
+				                         <td>
+				                         	<input class="cashbox-edit" name='number' type="text" t-att-value="cashbox.number" t-att-id='"cashbox_" + i + "_number"' onkeypress='return (event.charCode &gt;= 48 &amp;&amp; event.charCode &lt;= 57) || (event.charCode == 0 || event.charCode == 08 || event.charCode == 127)'></input>
+				                         </td>
+				                         <td t-att-id='"cashbox_" + i + "_subtotal"'>
+				                         	<t t-esc="cashbox.subtotal" />
+				                         </td>
+				                         <td>
+				                         	<t t-if="cashbox.is_delete">
+				                         		<span class="cashbox-delete fa fa-trash-o" name="delete"></span>
+				                         	</t>
+								         </td>
+			                        </tr>
+			                    	<t t-set="i" t-value="i+1" />
+				                </t>
+				                <t t-if="i > 0">
+				            	<tr>
+					      		<td class="cashbox-add">
+					        		<span class="fa fa-plus" name="add"> </span>
+							  		</td>
+					       		<td>Total</td>
+					        	<td class="cashbox-total" id="cashbox_total">
+					                  <t t-esc="widget.options.pos_cashbox_line[i-1].total" />
+					       		</td>
+				                    <td></td>
+				                    </tr>
+				                </t>
+		                	</tbody>
+		                </table>
+	                 </t>
+                </div>
+               	<div class="footer">
+                   	<div class="button confirm">
+                       	Confirm
+                   	</div>
+                   	<div class="button cancel">
+                       	Cancel
+                   	</div>
+               	</div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="popup_money_control">
+	    <div class="modal-dialog">
+            <div class="popup popup-text">
+                <t t-if="widget.options.title">
+                    <p class="title"><t t-esc=" widget.options.title || '' " /></p>
+                </t>
+                <t t-if="widget.options.body">
+                    <p class="body"><t t-esc=" widget.options.body || '' " /></p>
+                </t>
+              	<div>
+	                <div class="box">
+	                     <span class='label checkbox-label'>Reason <span class="input-required"> (*)</span></span>
+	                     <input class='reason field' name="reason" type="text" placeholder="Reason" t-att-value="widget.options.reason"/>
+	                </div>
+	                <div class="box">
+	                    <span class='label checkbox-label'>Amount <span class="input-required"> (*)</span></span>
+	                    <input class="amount field" name="amount" type="number" placeholder="Amount" t-att-value="widget.options.amount"/>
+	                </div>
+                </div>
+                <span class="card-issue"/>
+               	<div class="footer">
+                   	<div class="button confirm">
+                       	Confirm
+                   	</div>
+                   	<div class="button cancel">
+                       	Cancel
+                   	</div>
+               	</div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="popup_session">
+		<div class="modal-dialog">
+            <t t-if="widget.options.session">
+                <t t-value="widget.options.session" t-set="session" />
+                <div class="popup popup-text session-popup">
+                    <t t-if="widget.options.title">
+                        <p class="title session-title"><t t-esc=" widget.options.title || '' " /></p>
+                    </t>
+                    <t t-if="widget.options.body">
+                        <p class="body"><t t-esc=" widget.options.body || '' " /></p>
+                    </t>
+                    <div class="session_form">
+                        <t t-if="session.cash_control == true">
+                            <button t-attf-class="btn EndOfSession endsessionbutton highlight #{ session.state !='opened'  ? 'display-hide' : '' }">
+                                End of Session
+                            </button>
+                            <button t-attf-class="btn endsessionbutton ValidateClosingControl highlight validate #{ session.state !='closing_control'  ? 'display-hide' : '' }">
+                                Validate Closing &amp; Posting Entries
+                            </button>
+                        </t>
+                        <t t-if="session.cash_control !== true">
+                            <p class="body">Your pos config have not set cash control, please set cash control and close/reopen session</p>
+                        </t>
+                        <h5>Session : <t t-esc="session.name" /></h5>
+                        <table class="session-group">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <table class="session-group text1">
+                                            <tbody>
+                                                <tr><td>Responsible : </td><td><t t-esc="session.user_id[1]" /></td></tr>
+                                                <tr><td>Point of Sale : </td><td><t t-esc="session.config_id[1]" /></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table class="session-group text2">
+                                            <tbody>
+                                                <tr><td>Opening Date :</td><td><t t-esc="session.start_at" /></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <t t-if="session.cash_control == true">
+                                    <tr>
+                                        <td>
+                                           <table class="session-group text3">
+                                               <tbody>
+                                                   <tr><td>Opening Balance :</td><td style="font-weight: 900;"><t t-esc="widget.format_currency(session.cash_register_balance_start)" /></td></tr>
+                                                   <tr><td>+ Transactions  :</td><td style="font-weight: 900;"><t t-esc="widget.format_currency(session.cash_register_total_entry_encoding)" /></td></tr>
+                                                   <tr><td>= Theoretical Closing Balance : </td><td style="font-weight: 900;"><t t-esc="widget.format_currency(session.cash_register_balance_end)" /></td></tr>
+                                               </tbody>
+                                           </table>
+                                        </td>
+                                        <td>
+                                            <table class="session-group text4">
+                                                <tbody>
+                                                    <t t-if="session.is_admin ==1">
+                                                        <tr><td> Real Closing Balance :</td><td style="font-weight: 900;"><t t-esc="widget.format_currency(session.cash_register_balance_end_real)" /></td></tr>
+                                                    </t>
+                                               </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <t t-if="session.is_admin ==1">
+                                                <table class="session-group text5">
+                                                    <tbody>
+                                                        <tr><td> Difference :</td><td><t t-esc="widget.format_currency(session.cash_register_difference)" /></td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="footer">
+                        <t t-if="session.cash_control == true">
+                            <div class="pos_button_box">
+                                <span class="btn btn-warning session-button PutMoneyIn">
+                                    <i class='fa fa-level-down' /> Put Money In
+                                </span>
+                                <span class="btn btn-warning session-button TakeMoneyOut">
+                                    <i class='fa fa-level-up' /> Take Money Out
+                                </span>
+                                <span class="btn btn-warning session-button SetClosingBalance" value="end">
+                                    <i class='fa fa-money' /> Set Closing Balance
+                                </span>
+                            </div>
+                            <span class="session-button btn btn-danger cancel">
+                                Close
+                            </span>
+                        </t>
+                    </div>
+        	    </div>
+            </t>
+        </div>
+    </t>
+</templates>

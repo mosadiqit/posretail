@@ -1,0 +1,1322 @@
+.pos.mobile {
+    font-size: 35px;
+    font-family: 'Roboto', 'Noto', sans-serif;
+}
+
+.pos .mobile .ui-menu-item {
+    font-size: 20px;
+}
+.pos.mobile .leftpane {
+    width: 100%;
+    height: 100%;
+    border-right: solid 2px #CECBCB;
+    border-right: solid 6px #787878;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    left: 0px;
+    float: left;
+    position: relative;
+}
+.pos.mobile .find-order {
+    display: none;
+}
+.pos.mobile .header-loyalty th {
+    font-size: 30px;
+    padding: 10px;
+    width: 20%;
+    line-height: 35px;
+}
+
+.pos.mobile .header-table th {
+    font-size: 25px;
+}
+
+.pos.mobile .amount_total {
+    font-size: 35px;
+}
+
+.pos.mobile .sale_extra {
+    font-size: 35px;
+    line-height: 40px;
+    padding-bottom: 25px;
+}
+
+.pos.mobile .remove_sale_extra_item_logo {
+    max-width: 50px;
+    max-height: 35px;
+}
+
+.pos.mobile .rightpane {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    float: left;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+}
+
+.pos.mobile .actionpad .button.quickly_paid {
+    display: none;
+}
+
+.pos.mobile .header_order {
+    max-width: 100%;
+    height: 83px;
+    background: #fff;
+}
+
+.pos.mobile .order_logo {
+    max-width: 40px;
+    max-height: 40px;
+}
+
+.pos.mobile .header_order_widget_logo {
+    padding-right: 90px;
+    width: auto;
+}
+
+.pos.mobile .actionpad {
+    width: 46%;
+    height: auto;
+}
+
+.pos.mobile .numpad {
+    float: none;
+}
+
+.pos.mobile .pads .numpad button {
+    float: none;
+    height: 115px;
+    width: 115px;
+    border-radius: 20%;
+    margin: 2px;
+    font-size: 40px !important;
+}
+
+.pos.mobile .input-button {
+    font-size: 45px !important;
+}
+
+.pos.mobile .alert.alert-with-icon {
+    width: 100%;
+    top: 45px !important;
+    padding-left: 66px;
+    font-size: 25px;
+    height: 20px;
+}
+
+.pos.mobile .pads .numpad li {
+    font-size: 0px;
+}
+
+.pos.mobile .numpad button {
+    height: 120px;
+    width: 24%;
+    font-size: 40px;
+}
+
+.pos.mobile .payment-numpad .numpad button {
+    float: left;
+}
+
+
+.pos.mobile .actionpad .button {
+    height: 150px;
+    font-size: 35px;
+}
+
+.pos.mobile .order {
+    max-width: 100%;
+    font-size: 35px;
+    background: inherit;
+}
+
+.pos.mobile .popup.popup-selection .selection {
+    min-height: 800px !important;
+
+}
+
+.pos.mobile .modal-dialog .popup {
+    width: 90%;
+    min-height: 1000px !important;
+}
+
+.pos.mobile .popup.popup-number {
+    height: 900px !important;
+}
+
+.pos.mobile .button_key {
+    display: none;
+}
+
+.pos.mobile .find_customer > input {
+    width: 350px;
+    height: 60px;
+    font-size: 35px;
+    max-width: 400px;
+    display: none;
+}
+
+.pos.mobile .product-name {
+    /*font-size: 35px;*/
+}
+
+.pos.mobile .pos-content {
+    top: 70px;
+
+}
+
+.pos.mobile .pos-topheader {
+    height: 71px;
+}
+.pos.mobile .set_total_items {
+    font-size: 30px !important;
+}
+.pos.mobile .order-button {
+    min-width: 70px;
+    font-size: 25px;
+}
+
+.pos.mobile .order-button .order-sequence {
+    font-size: 35px;
+}
+
+.pos.mobile .select-currency {
+    font-size: 30px;
+}
+
+.pos.mobile .left_button {
+    width: 18%;
+    float: left;
+    margin: 30px;
+    height: 180px;
+    font-size: 35px;
+    border-radius: 20%;
+    box-shadow: none;
+}
+
+.pos.mobile .button-icon {
+    margin-top: 20px;
+}
+.pos.mobile .button-icon .fa {
+    font-size: 70px;
+}
+
+.pos.mobile .left_button .product-name {
+    font-size: 30px;
+    top: 80px;
+    text-align: center;
+    width: 100%;
+    line-height: 45px;
+    height: 100px;
+}
+
+.pos.mobile .popup.popup-selection .selection-item {
+    font-size: 40px;
+    line-height: 100px;
+}
+
+.pos.mobile .popup .title {
+    font-size: 45px;
+    line-height: 65px;
+    font-weight: normal;
+    color: #1A237E;
+    padding: 40px;
+}
+
+.pos.mobile .paymentlines-container {
+    border-bottom: none;
+}
+
+.pos.mobile .paymentlines-container .paymentlines {
+    margin-left: -5px !important;
+}
+
+.pos.mobile .line_number {
+    font-size: 35px;
+}
+
+.pos.mobile .payment-buttons {
+    width: 100%;
+}
+
+.pos.mobile .payment-buttons .label {
+    color: #ffffff !important;
+}
+
+.pos.mobile .payment-screen .payment-numpad {
+    width: 100% !important;
+    float: left;
+    margin-left: 35px;
+}
+
+.pos.mobile .payment-screen .payment-numpad .numpad {
+    width: 100% !important;
+    margin-left: -30px;
+    float: left;
+}
+
+.pos.mobile .paymentline .col-name {
+    font-size: 30px;
+}
+
+.pos.mobile .paymentline.extra .col-due {
+    font-size: 30px;
+}
+
+.pos.mobile .payment-buttons .left_button {
+    width: 140px !important;
+    margin: 5px !important;
+}
+
+.pos.mobile .payment-screen .left_button {
+    width: 170px !important;
+    margin: 10px !important;
+}
+
+.pos.mobile .pos_logo {
+    max-width: 70px;
+    max-height: 70px;
+}
+
+.pos.mobile .pay.pos_logo {
+    display: none;
+}
+
+.pos.mobile .button_text {
+    font-size: 35px;
+    width: 140px;
+    font-weight: normal;
+}
+
+.payment-screen.mobile .paymentlines-empty .message {
+    text-align: center;
+}
+
+.pos.mobile .notification {
+    font-size: 40px;
+    font-weight: 900;
+    height: 40px;
+    text-align: center;
+    padding-top: 12px;
+}
+
+.pos.mobile .pos-rightheader {
+    left: 0px;
+}
+
+.pos.mobile .show_hide_buttons {
+    font-size: 45px;
+    height: 50px;
+}
+
+.pos.mobile .username {
+    display: none;
+}
+
+.pos.mobile .logo_shop_header {
+    width: 60px;
+    height: 60px;
+    margin: 0px;
+    float: left;
+    right: 20px;
+    margin-right: 100px;
+}
+
+.pos.mobile .js_synch {
+    max-width: 100px;
+    display: none;
+}
+
+.pos.mobile .pos-rightheader .header-button {
+    padding: 10px;
+    margin-left: 20px;
+    font-size: 30px;
+}
+
+.pos.mobile .clientlist-screen .client-picture {
+    margin-left: 40px;
+}
+
+.pos.mobile .clientlist-screen .client-details input.client-name {
+    font-size: 24px;
+    line-height: 24px;
+    margin-left: -85px !important;
+    width: 40% !important;
+    margin-top: 100px;
+}
+
+.pos.mobile .order-button.selected .order-sequence {
+    display: none;
+}
+
+.pos.mobile .clientlist-screen .client-details input, .pos.mobile .clientlist-screen .client-details select {
+    width: 80%;
+    color: black;
+    margin-left: 40px;
+    height: 80px;
+    font-size: 25px;
+}
+
+.pos.mobile .order-note {
+    font-size: 35px;
+    line-height: 100px;
+}
+
+.pos.mobile .header_logo {
+    padding-top: 13px;
+    width: 42px;
+    height: 43px;
+}
+
+.pos.mobile .order .order-empty .fa {
+    font-size: 400px;
+}
+
+.pos.mobile .order .order-empty h1 {
+    font-size: 60px;
+}
+
+.pos.mobile .shop_logo {
+    margin: 0px;
+    max-width: 80px;
+    margin-top: -10px;
+}
+
+.pos.mobile .pad {
+    height: 60px;
+}
+
+.pos.mobile .order-button.square {
+    font-size: 30px;
+    height: 100%;
+}
+
+.pos.mobile .order-button {
+    padding-top: 10px;
+    height: 100%;
+}
+
+.pos.mobile .categories_list .card-content {
+    padding: 0px !important;
+}
+
+.pos.mobile .order-button.selected {
+    font-size: 30px;
+    color: #ffffff
+}
+
+.pos.mobile .fa-wifi {
+    font-size: 35px;
+}
+
+.pos.mobile .product {
+    box-shadow: none;
+}
+
+.pos.mobile .button-name {
+    font-size: 35px;
+    line-height: 50px;
+    font-weight: 400;
+}
+
+.pos.mobile .client-details .button-name {
+    font-size: 25px;
+    text-transform: none;
+}
+
+.pos.mobile .product .product-img img {
+    width: 100%;
+    height: 100%;
+    margin-top: 10px;
+
+}
+.pos.mobile .product-list .product {
+    width: 30%;
+    height: 240px;
+    font-size: 30px;
+    border-radius: 20px;
+}
+
+.pos.mobile .swiper-container-android .swiper-slide, .swiper-wrapper {
+    width: 1024px;
+}
+
+.pos.mobile .product .price-tag {
+    line-height: 40px;
+    font-size: 25px;
+    text-align: right;
+}
+
+.pos.mobile .product .product-name {
+    line-height: 40px;
+    padding-top: 40px;
+    text-align: center
+}
+
+.pos.mobile .product-list .product .product-name {
+    font-size: 25px;
+    line-height: 40px;
+    max-height: none;
+}
+
+.pos.mobile .clientlist-screen .client-detail > .label {
+    font-size: 20px;
+}
+
+.pos.mobile .detail {
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.pos.mobile .category-simple-button {
+    font-size: 20px;
+}
+
+.pos.mobile li {
+    line-height: 40px;
+}
+
+.pos.mobile .info {
+    line-height: 50px;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.pos.mobile .search-products {
+    width: 500px !important;
+}
+
+.pos.mobile .order .orderline .product-name {
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 900;
+    width: 60%;
+}
+
+.pos.mobile .extra_functions {
+    font-size: 30px;
+}
+
+.pos.mobile .order .orderline .info-list {
+    font-size: 30px;
+    color: black;
+    line-height: 40px;
+}
+
+.pos.mobile .order .summary .total {
+    font-size: 40px;
+    color: black;
+}
+
+.pos.mobile .categories_list {
+    width: 20%;
+}
+
+.pos.mobile .product-list-scroller {
+    width: 80%;
+}
+
+.pos.mobile .order .summary .total .value {
+    font-size: 40px;
+    line-height: 40px;
+}
+
+.pos.mobile .order .orderline .price {
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 30px;
+    color: black;
+}
+
+.pos.mobile .total .label {
+    font-size: 35px;
+}
+
+.pos.mobile .order .summary .line {
+    border-color: black;
+    padding-top: 10px;
+    height: 120px;
+}
+
+.pos.mobile .order .summary .line .subentry {
+    padding-top: 20px;
+    font-size: 35px;
+    line-height: 40px;
+    text-align: left;
+}
+
+.pos.mobile .order .summary .line .subentry > span {
+    font-size: 40px;
+}
+
+.pos.mobile .order .summary {
+    padding-top: 30px;
+}
+
+.pos.mobile .product .product-img {
+    padding: 65px 65px 65px 65px;
+}
+
+.pos.mobile .order-button.selected .order-sequence {
+    background: none;
+    top: -2px;
+    color: black;
+    font-size: 20px;
+}
+
+.pos.mobile .category-button {
+    width: 200px;
+    height: 200px;
+}
+
+.pos.mobile .category-list-scroller {
+    max-height: 200px;
+}
+
+.pos.mobile .category-button .category-img {
+    width: 200px;
+}
+
+.pos.mobile .category-button .category-name {
+    top: 90px;
+    font-size: 35px;
+    line-height: 35px;
+}
+
+.pos.mobile .rightpane-header {
+    height: 120px;
+}
+
+.pos.mobile .pos-sale-ticket {
+    width: 90%;
+    font-size: 25px !important;
+    line-height: 40px;
+}
+
+.pos.mobile .breadcrumb-arrow {
+    padding-top: 24px;
+    height: 40px;
+    width: 40px;
+    padding-left: 20px;
+    margin-top: 15px;
+    color: black;
+}
+
+.pos.mobile .category_home_icon {
+    width: 100px;
+    height: 100px;
+    max-width: 100px;
+}
+
+.swal2-modal.mobile {
+    width: 85% !important;
+}
+
+.pos.mobile .search-clear {
+    font-size: 20px;
+    margin-top: 11px;
+    margin-left: 15px;
+    cursor: pointer;
+    padding-left: 10px;
+    background: inherit;
+    right: 10px;
+    display: inline-flex;
+    cursor: pointer;
+}
+.pos.mobile .categories {
+    display: none;
+}
+.pos.mobile .search-clear.right {
+    left: 310px !important;
+}
+.pos .categories_list {
+    margin-top: 85px;
+    float: left;
+    background: inherit;
+    bottom: 80px;
+}
+
+.pos.mobile .breadcrumb-home {
+    width: 100px;
+    height: 100px;
+}
+
+.pos.mobile .category_child {
+    padding-top: 20px;
+}
+
+.pos.mobile .order .order-widget-title {
+    height: 60px;
+    line-height: 60px;
+}
+
+.pos.mobile .subwindow-container-fix .numpad {
+    width: 50%;
+    margin-top: 10px;
+    float: right;
+}
+
+.pos.mobile .order-container {
+    background: #fff;
+}
+
+.pos.mobile .payment-numpad .numpad button {
+    height: 130px;
+    font-size: 50px;
+    width: 130px;
+    background: white;
+    color: black
+}
+
+.pos.mobile .paymentline .col-due, .pos.mobile .paymentline .col-tendered, .pos.mobile .paymentline .col-change {
+    color: black;
+}
+
+.pos.mobile .actionpad .button.set-customer {
+    font-weight: 400;
+    max-width: 100%;
+    border: none;
+}
+
+.pos.mobile .actionpad .button.pay {
+    height: 335px;
+    max-width: 100%;
+    border: none;
+}
+
+.payment-screen.mobile .paymentlines-empty .message {
+    text-align: center;
+    padding-top: 20px;
+    color: red;
+}
+
+.pos.mobile .pads .numpad button img {
+    box-shadow: none;
+    border-radius: 20%;
+    margin: 10px;
+    font-size: 50px !important;
+}
+
+.pos.mobile .pads .numpad button .input-button {
+    font-size: 35px !important;
+}
+
+.pos.mobile .order .orderline {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.pos.mobile .icon_line {
+    float: left;
+    padding-right: 30px;
+    display: flex;
+    height: 60px
+}
+
+.pos.mobile .right_pane_logo {
+    max-width: 60px;
+    background: white;
+    border-radius: 20%;
+    height: 60px;
+    margin-right: 10px;
+}
+
+pos.mobile .screen .centered-content {
+    top: 240px;
+}
+
+.pos.mobile .breadcrumb-button {
+    font-weight: normal;
+    font-size: 35px;
+    height: 60px;
+    margin-top: 10px;
+    padding-top: 10px;
+    margin-left: -10px;
+}
+
+.pos.mobile .screen .left-content.pc40 {
+    left: 0px;
+    right: 60%;
+
+}
+
+.pos.mobile .screen .right-content.pc60 {
+    left: 40%;
+    right: 0px;
+    border: none;
+}
+
+.pos.mobile .scree .top-content {
+    left: 0px;
+    font-size: 35px;
+}
+
+.pos.mobile .screen .full-content {
+    left: 0px;
+    font-size: 35px;
+}
+
+.pos.mobile .pos-branding {
+    width: 0px;
+    display: none;
+}
+
+.pos.mobile .pos-rightheader .header-button:last-child {
+    font-size: 35px;
+}
+
+.screen.mobile .top-content {
+    font-size: 25px;
+    height: 100px;
+}
+
+.pos.mobile .find_customer {
+    float: right;
+    display: none;
+    padding: 0px 0px 0px 0px;
+}
+
+.pos.mobile .client-list td {
+    font-size: 35px;
+}
+
+.pos.mobile .oe_link_icon {
+    font-size: 45px;
+}
+
+.pos.mobile.clientlist-screen .searchbox input {
+    width: 220px;
+
+}
+
+.pos.mobile .pos_note {
+    font-size: 30px;
+}
+
+.pos.mobile .order_signature {
+    font-size: 30px;
+}
+
+.pos.mobile .paymentmethods-container .label {
+    color: #ffffff;
+    border: none;
+}
+
+.pos.mobile .paymentlines-container .paymentlines .label {
+    color: #ffffff;
+}
+
+.pos.mobile .searchbox input {
+    margin: 0px !important;
+    height: 50px;
+    left: 60%;
+    width: 70%;
+    text-align: center;
+    font-size: 30px;
+}
+.pos.mobile .searchbox:hover {
+    -webkit-box-shadow: none
+}
+.pos.mobile .rightpane-header .searchbox {
+    margin-top: 0px;
+    margin-right: 0px;
+}
+
+.pos.mobile .client-special-info {
+    display: none;
+}
+
+.pos.mobile .clientlist-screen .button.new-customer {
+    width: 60px;
+    font-size: 30px;
+    border-radius: 20%;
+    text-align: center;
+    margin-top: 11px;
+
+}
+
+.pos.mobile .button_logo {
+    max-width: 50px;
+    padding-right: 35px;
+}
+
+.pos.mobile .full-content {
+    top: 100px;
+}
+
+.screen .top-content {
+    height: 100px;
+}
+
+.pos.mobile .top-content .button {
+    line-height: 70px;
+    font-size: 25px !important;
+    padding-right: 10px;
+    padding-left: 10px;
+    text-align: center;
+    max-height: 65px;
+    max-width: 200px;
+    border-radius: 30px;
+    border-radius: 10px;
+    text-overflow: clip;
+    overflow: hidden;
+}
+
+.pos.mobile .clientlist-screen .edit-buttons .button {
+    max-width: 50px;
+    border-radius: 20%;
+}
+
+.pos.mobile .pads .numpad button .input-button {
+    font-size: 45px !important;
+}
+
+.pos.mobile .top-content .button.back {
+    max-height: 70px;
+    font-size: 30px;
+    width: 180px;
+    border-radius: 10px;
+}
+.pos.mobile .centered-content {
+}
+
+.pos.mobile .info_tooltip {
+    display: none;
+}
+
+.pos.mobile .cart_qty {
+    min-height: 40px;
+    font-size: 30px;
+    left: 0;
+    min-width: 35px;
+    line-height: 40px;
+}
+
+.pos.mobile .invoice_journals {
+    margin-top: 200px;
+}
+
+.pos.mobile .product .qty_available {
+    top: 50px;
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+.pos.mobile .header-table-order th {
+    font-size: 30px;
+    line-height: 35px;
+    padding: 25px;
+}
+
+.pos.mobile .product .qty_not_available {
+    top: 50px;
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+.pos.mobile .ribbon {
+    display: none;
+}
+
+.payment-screen .paymentlines-empty .message {
+    font-size: 0px;
+}
+
+.pos.mobile textarea {
+    font-size: 35px;
+    background: #9E9E9E;
+}
+
+.pos.mobile .popup-number .title, .pos .popup-textinput .title {
+    font-size: 40px;
+    line-height: 40px;
+}
+
+.pos.mobile .popup .footer {
+    border-top: none;
+    height: 80px;
+}
+
+.pos.mobile .popup .button {
+    font-size: 35px;
+    border-radius: 10px;
+    line-height: 80px;
+    width: 300px;
+    height: 80px;
+    color: white;
+    background: #3F51B5;
+    margin-bottom: 0px;
+    margin-top: -10px;
+}
+
+.pos.mobile .debug-widget {
+    display: none;
+}
+
+.pos.mobile .category-simple-button {
+    font-size: 35px;
+    color: white;
+    margin: 8px;
+}
+
+.pos.mobile .tooltip-info {
+    color: white;
+    font-size: 35px;
+    line-height: 40px;
+}
+
+.pos.mobile .product_special {
+    top: 70px;
+    line-height: 40px;
+    display: none;
+}
+
+.pos.mobile .clientlist-screen .button.new-product {
+    margin-left: 300px;
+}
+
+.swal2-modal.mobile h2 {
+    color: red;
+    font-size: 50px;
+}
+
+.pos.mobile .clientlist-screen .searchbox {
+    left: 40%;
+    margin-top: 15px;
+}
+
+.pos.mobile .searchbox {
+
+}
+
+.pos.mobile .clientlist-screen .button.new-product {
+    background: #00BCD4;
+}
+
+.pos.mobile .only_supplier {
+    left: 70%;
+}
+
+.pos.mobile .invoices_open {
+    left: 70%;
+    width: 220px;
+}
+
+.pos.mobile .screen p {
+    font-size: 35px;
+}
+
+.pos.mobile .paymentlines .label > * {
+    font-size: 25px;
+}
+
+.pos.mobile .receipt-screen .centered-content .button {
+    font-size: 25px;
+    width: 70%;
+    padding: 15px 40px;
+}
+
+.pos.mobile .voucher-select {
+    height: 100px;
+    font-size: 35px;
+}
+
+.pos.mobile .pull-right {
+    right: 0px;
+}
+
+.pos.mobile .promotion_active {
+    font-size: 35px;
+    line-height: 40px;
+}
+
+.pos.mobile .pos_signature {
+    margin: 37px;
+}
+
+.pos.mobile .popup input, .pos.mobile .popup-input {
+    font-size: 40px;
+    line-height: 40px;
+    height: 100px;
+    background: #fff;
+    color: black;
+}
+
+.pos.mobile .label {
+    font-size: 35px;
+    line-height: 40px;
+    padding-left: 40px;
+}
+
+.pos.mobile .leftpane .pads {
+    background: #eeeeee !important;
+}
+
+.pos.mobile .paymentline.selected {
+    font-size: 35px;
+    height: 100px !important;
+}
+
+.pos.mobile .receipt-screen {
+    background: #333333;
+}
+
+.screen.mobile .top-content h1 {
+    color: white;
+}
+
+.pos.mobile .voucher-label {
+    font-size: 25px;
+    line-height: 40px;
+    padding-left: 40px;
+}
+
+.pos.mobile .pull-left {
+    left: 7%
+}
+
+.pos .mobile.btn:not(.btn-just-icon):not(.btn-fab) .fa, .navbar .navbar-nav > li > a.btn:not(.btn-just-icon):not(.btn-fab) .fa {
+    font-size: 35px;
+}
+
+.pos.mobile .product .price-tag-cost {
+    font-size: 0px;
+}
+
+.pos.mobile .rightpane .layout-table .header-row {
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+    left: 0px;
+}
+
+.pos.mobile .btn:not(.btn-just-icon):not(.btn-fab) .fa, .navbar .navbar-nav > li > a.btn:not(.btn-just-icon):not(.btn-fab) .fa {
+    font-size: 35px;
+}
+
+.pos.mobile .product-list-container {
+    top: 120px;
+
+}
+
+.pos.mobile .category-list.simple {
+    padding-left: 0px;
+}
+
+.pos.mobile .buttons_pane {
+    width: 100%;
+    left: 0px;
+
+}
+
+.screen.mobile .top-content {
+
+}
+
+.pos.mobile .screen {
+
+}
+
+.pos.mobile .product-list {
+    background: inherit;
+
+}
+
+.pos.mobile .button_sync {
+    display: none;
+}
+
+.pos.mobile .show_hide_pad {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    font-size: 40px;
+}
+
+.pos.mobile .button-list {
+    padding-left: 40px;
+    padding-top: 40px;
+    background: inherit;
+}
+
+.pos.mobile .top-content .only_supplier {
+    display: none;
+}
+
+.pos.mobile .top-content .only_customer {
+    display: none;
+}
+
+.pos.mobile .clientlist-screen .client-detail {
+    font-size: 20px;
+}
+
+.pos.mobile .sort {
+    font-size: 30px;
+}
+
+.pos.mobile .client-list tr td {
+    font-size: 20px;
+    line-height: 60px;
+}
+
+.pos.mobile .swal2-modal .swal2-content {
+    font-size: 60px;
+}
+
+.pos.mobile .form-footer {
+    max-width: 93%;
+    padding-left: 0px;
+
+}
+
+.pos.mobile .icon_line_logo {
+    max-height: 100px;
+    height: 60px;
+    padding: 0px 10px;
+    border-radius: 20%;
+    width: 65px;
+    max-width: 45px;
+}
+
+.pos.mobile pos .pull-right {
+    width: 45%;
+}
+
+.pos.mobile pos .pull-left {
+    width: 45%;
+}
+
+.pos.mobile .card .card-title {
+    font-size: 30px;
+}
+
+.pos.mobile .btn {
+    font-size: 25px;
+    min-height: 60px !important;
+    line-height: 60px;
+}
+
+.pos.mobile .category_row {
+    text-overflow: ellipsis;
+    font-weight: 900;
+    background: #555555;
+    line-height: 40px;
+    height: 70px;
+    overflow: hidden;
+}
+
+.pos.mobile .category_row > td {
+    font-size: 25px !important;
+}
+
+.pos.mobile .ribbon {
+    width: 200px;
+    height: 200px;
+}
+
+.pos.mobile .ribbon span {
+    width: 200px;
+    top: 74px;
+    left: -40px;
+    font-size: 25px;
+    line-height: 41px;
+}
+
+.pos.mobile .popup-numpad {
+    width: 100%;
+}
+
+.pos.mobile .order .loyalty {
+    font-size: 25px;
+    max-width: 500px;
+    line-height: 50px;
+}
+
+.pos.mobile .loyalty_remaining_point {
+    font-size: 25px;
+}
+
+.pos.mobile .popup .popup-number .popup-password {
+    height: 650px;
+}
+
+.pos.mobile .popup-password .popup-numpad {
+    width: 300px;
+
+}
+.pos.mobile .oe_status {
+    font-size: 30px;
+    margin: 5px;
+}
+.pos.mobile .popup-numpad .input-button, .pos.mobile .popup-numpad .mode-button {
+    height: 120px;
+    width: 120px;
+    background: #9E9E9E;
+    font-size: 50px;
+    color: black;
+}
+
+.pos.mobile .popup input:focus, .pos.mobile .popup-input.active {
+    padding-top: 30px;
+    background: white;
+    box-shadow: none;
+    font-size: 35px;
+    line-height: 35px
+}
+
+.pos.mobile .booked_order_button {
+    display: none;
+}
+
+.pos.mobile .sale_lock_button {
+    display: none;
+}
+
+.pos.mobile .order .order-widget-title .title-name {
+    width: 60%;
+}
+
+.pos.mobile .order .order-widget-title .title-name {
+    font-size: 35px;
+}
+
+.pos.mobile .order .order-widget-title .title-qty {
+    font-size: 35px;
+}
+
+.pos.mobile .order .order-widget-title .title-subtotal {
+    font-size: 35px;
+}
+
+.pos.mobile .amount_taxes {
+    font-size: 30px;
+}
+.pos.mobile .order .orderline .qty {
+    font-size: 25px;
+}

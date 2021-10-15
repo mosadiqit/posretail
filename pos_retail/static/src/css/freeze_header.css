@@ -1,0 +1,11 @@
+/*FREEZE*/
+  .table_header_freeze table.o_list_view {
+     width: 100%;
+     border-collapse: collapse;
+  }
+
+  .table_header_freeze table.o_list_view thead tr{
+    background-color: #514f90;
+    color: #FDFDFD;
+  }
+

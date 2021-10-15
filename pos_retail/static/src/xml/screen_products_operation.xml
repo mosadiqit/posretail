@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="popup_create_pos_category">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y">
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card create_category">
+                                    <div class="card-content">
+                                        <h4 class="card-title">Create Category</h4>
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="form-group label-floating">
+                                                <div class='client-picture'>
+                                                    <t><i class='fa fa-camera'></i></t>
+                                                    <input type='file' class='image-uploader'></input>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <span class='label voucher-label'>Name<span class="input-required"> (*)</span></span>
+                                            <input class="form-control category_input" name="name" required="true" />
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <span class='label voucher-label'>Sequence</span>
+                                            <input class="form-control category_input" name="sequence"/>
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <span class='label voucher-label'>Parent category</span>
+                                            <select class='form-control voucher-select category_input' name='parent_id'>
+                                                <option value=''>None</option>
+                                                <t t-foreach='widget.pos.categories' t-as='category'>
+                                                    <option t-att-value='category.id'>
+                                                        <t t-esc='category.name'/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </div>
+                                        <span class="card-issue"/>
+                                        <div class="form-footer text-center">
+                                            <div class="btn btn-success pull-right confirm">
+                                                Create
+                                            </div>
+                                            <div class="btn btn-danger pull-left cancel">
+                                                Close
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="popup_create_product">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y" style="max-height: 600px;min-height: 300px;height: fit-content;">
+                <t t-if="widget.title">
+                    <p class="title"><t t-esc="widget.title"/></p>
+                </t>
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card create_product">
+                                    <div class="card-content">
+                                        <h4 class="card-title">Create Product</h4>
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="form-group label-floating">
+                                                <div class='client-picture'>
+                                                    <t><i class='fa fa-camera'></i></t>
+                                                    <input type='file' class='image-uploader'></input>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <span class='label voucher-label'>Name<span class="input-required"> (*)</span></span>
+                                            <input class="form-control product_input" name="name" required="true" />
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <span class='label voucher-label'>List Price</span>
+                                            <input class="form-control product_input" name="list_price" required="true" />
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <span class='label voucher-label'>Category</span>
+                                            <select class='form-control voucher-select product_input' name='pos_categ_id'>
+                                                <option value=''>None</option>
+                                                <t t-foreach='widget.pos.categories' t-as='category'>
+                                                    <option t-att-value='category.id'>
+                                                        <t t-esc='category.name'/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <span class='label voucher-label'>Internal ref</span>
+                                            <input class="form-control product_input" name="default_code" required="true" />
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <span class='label voucher-label'>Barcode</span>
+                                            <input class="form-control product_input" name="barcode" required="true" />
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <span class='label voucher-label'>Cost Price</span>
+                                            <input class="form-control product_input" name="cost_price" required="true" />
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <span class='label voucher-label'>Type</span>
+                                            <select class='form-control voucher-select product_input' name='type'>
+                                                 <option value='consu'>Consumable</option>
+                                                 <option value='service'>Service</option>
+                                                 <option value='product'>StockAble Product</option>
+                                            </select>
+                                        </div>
+                                        <span class="card-issue"/>
+                                        <div class="form-footer text-center">
+                                            <div class="btn btn-success pull-right confirm">
+                                                Create
+                                            </div>
+                                            <div class="btn btn-danger pull-left cancel">
+                                                Close
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="products_operation">
+        <div class="clientlist-screen screen">
+            <div class="full_width screen-content">
+                <section class="top-content">
+                    <span class='button back'>
+                        <i class='fa fa-angle-double-left'></i>
+                        Back
+                    </span>
+                    <span class='searchbox search-product'>
+                        <input placeholder='Search Products' />
+                        <span class='search-clear'></span>
+                    </span>
+                    <span class='searchbox'></span>
+                    <span class="button add_pos_category">
+                        <i class="fa fa-plus"></i>
+                        Add Category
+                    </span>
+                    <span class='button new-product'>
+                        Add new Product
+                    </span>
+                </section>
+                <section class="full-content">
+                    <div class='window'>
+                        <section class='subwindow collapsed'>
+                            <div class='subwindow-container collapsed'>
+                                <div class='subwindow-container-fix product-details-contents'>
+                                </div>
+                            </div>
+                        </section>
+                        <section class='subwindow'>
+                            <div class='subwindow-container'>
+                                <div class='subwindow-container-fix touch-scrollable scrollable-y'>
+                                    <table class='client-list'>
+                                        <thead>
+                                            <tr>
+                                                <th><a href="#" class="sort sort_by_product_operation_id">ID</a></th>
+                                                <th><a href="#" class="sort sort_by_product_operation_default_code">Internal reference</a></th>
+                                                <th><a href="#" class="sort sort_by_product_operation_barcode">Barcode</a></th>
+                                                <th><a href="#" class="sort sort_by_product_operation_display_name">Name</a></th>
+                                                <th><a href="#" class="sort sort_by_product_operation_list_price">List Price</a></th>
+                                                <th><a href="#" class="sort sort_by_product_operation_type">Type</a></th>
+                                                <th><a href="#" class="sort sort_by_product_operation_qty_available">Qty on hand</a></th>
+                                                <th><a href="#" class="sort sort_by_product_operation_pos_categ_id">Category</a></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class='client-list-contents'>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="product_row">
+        <tr class='product_row' t-att-data-id='product.id'>
+            <td>
+                <t t-esc='product.id' />
+            </td>
+            <td>
+                <t t-if="product.default_code"><t t-esc='product.default_code' /></t>
+                <t t-if="!product.default_code">N/A</t>
+            </td>
+            <td>
+                <t t-if="product.barcode"><t t-esc='product.barcode' /></t>
+                <t t-if="!product.barcode">N/A</t>
+            </td>
+            <td><t t-esc='product.display_name' /></td>
+            <td><t t-esc='product.list_price' /></td>
+            <td><t t-esc='product.type' /></td>
+            <td><t t-esc='product.qty_available'/></td>
+            <td><t t-if="product.pos_categ_id"><t t-esc='product.pos_categ_id[1]' /></t> </td>
+        </tr>
+    </t>
+
+    <t t-name="product_edit">
+        <section class='touch-scrollable scrollable-y client-details' style="max-height: 400px">
+            <div class='client-picture'>
+                <t t-if='!product.id'>
+                    <i class='fa fa-camera'></i>
+                </t>
+                <t t-if='product.id'>
+                    <img t-att-src='widget.product_icon_url(product.id)' />
+                </t>
+                <input type='file' class='image-uploader'></input>
+            </div>
+            <div class='client-name'>
+                <input class='form-control detail' name='name' t-att-value='product.name' placeholder='Name'></input>
+            </div>
+            <div class='client-details-box clearfix'>
+                <span class="card-issue"/>
+                <div class='client-details-left'>
+                    <div class='client-detail' hidden="hidden" disabled="disabled">
+                        <span class='label'>ID</span>
+                        <input class="form-control detail" type="number" t-att-value="product.id" name="id" hidden="hidden" disabled="disabled"/>
+                    </div>
+                    <div class='client-detail'>
+                        <span class='label'>Internal</span>
+                        <input class='form-control client-default_code detail' name='default_code' t-att-value='product.default_code || ""' placeholder='Internal reference'></input>
+                    </div>
+                    <div class='client-detail'>
+                        <span class='label'>List price</span>
+                        <input class='form-control client-list_price detail' name='list_price' t-att-value='product.list_price || ""' placeholder='List Price'></input>
+                    </div>
+                    <div class='client-detail'>
+                        <span class='label'>Type</span>
+                        <select class='form-control detail' name='type' t-att-value="product['type']">
+                             <option value='consu' t-att-selected="product['type'] ? ((product['type'] === 'consu') ? true : undefined) : undefined">Consumable</option>
+                             <option value='service' t-att-selected="product['type'] ? ((product['type'] === 'service') ? true : undefined) : undefined">Service</option>
+                             <option value='product' t-att-selected="product['type'] ? ((product['type'] === 'product') ? true : undefined) : undefined">StockAble Product</option>
+                        </select>
+                    </div>
+                    <div class='client-detail'>
+                        <span class='label'>Category</span>
+                        <t t-if="product.pos_categ_id">
+                            <select class='form-control client-pos_categ_id detail' name='pos_categ_id' t-att-value='product.pos_categ_id[0]'>
+                                <option value=''>None</option>
+                                <t t-foreach='widget.pos.categories' t-as='category'>
+                                    <option t-att-value='category.id' t-att-selected="category.id ? ((product.pos_categ_id[0] === category['id']) ? true : undefined) : undefined">
+                                        <t t-esc='category.name'/>
+                                    </option>
+                                </t>
+                            </select>
+                        </t>
+                        <t t-if="!product.pos_categ_id">
+                            <select class='form-control client-pos_categ_id detail' name='pos_categ_id'>
+                                <option value=''>None</option>
+                                <t t-foreach='widget.pos.categories' t-as='category'>
+                                    <option t-att-value='category.id'>
+                                        <t t-esc='category.name'/>
+                                    </option>
+                                </t>
+                            </select>
+                        </t>
+                    </div>
+                    <t t-if="product.type == 'product' and widget.pos.config.display_onhand">
+                        <div class='client-detail'>
+                            <span class='label'>Quantity on hand</span>
+                            <input disabled="disabled" class='form-control client-list_price state' t-att-value='product.qty_available || 0'/>
+                        </div>
+                    </t>
+                    <div class='client-detail'>
+                        <span class='label'>Barcode</span>
+                        <input class='form-control detail' name='barcode' t-att-value="product.barcode ||  ''" placeholder='Barcode'></input>
+                    </div>
+                </div>
+                <span class="card-issue"/>
+                <div class='client-details-right'>
+                    <div class="client-detail">
+                        <span class='label'>Save</span>
+                        <button class="btn btn-success save" style="height: 40px; width: 120px"><i class="fa fa-save"/></button>
+                    </div>
+                    <div class="client-detail state">
+                        <span class='label'>Print Label</span>
+                        <button class="btn btn-default print_label" style="height: 40px; width: 120px"><i class="fa fa-print"/></button>
+                    </div>
+                    <t t-if="product.type == 'product' and widget.pos.config.display_onhand">
+                        <div class="client-detail state">
+                            <span class='label'>Update qty on hand</span>
+                            <button class="btn btn-success update_qty_on_hand" style="height: 40px; width: 120px"><i class="fa fa-check"/></button>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </section>
+    </t>
+
+    <t t-name="product_label_xml">
+        <receipt align='center' width='40' value-thousands-separator='' >
+            <t>
+                <left>
+                    <t t-esc="product.display_name"/>
+                </left>
+                <cennter>
+                    <t t-esc="product.default_code"/>
+                </cennter>
+                <right>
+                    <barcode encoding="ean13"><t t-esc='product.barcode'/></barcode>
+                </right>
+            </t>
+        </receipt>
+    </t>
+
+</templates>

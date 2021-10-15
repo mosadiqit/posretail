@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="medical_insurance_tree" model="ir.ui.view">
+            <field name="name">medical.insurance.tree</field>
+            <field name="model">medical.insurance</field>
+            <field name="arch" type="xml">
+                <tree string="Medical Insurance">
+                    <field name="insurance_company_id"/>
+                    <field name="subscriber_id" required="1"/>
+                    <field name="patient_number"/>
+                    <field name="rate"/>
+                    <field name="medical_number"/>
+                    <field name="patient_name"/>
+                    <field name="phone"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="medical_insurance_form" model="ir.ui.view">
+            <field name="name">medical.insurance.form</field>
+            <field name="model">medical.insurance</field>
+            <field name="arch" type="xml">
+                <form string="Medical Insurance">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="insurance_company_id" class="oe_edit_only"/>
+                            <h1>
+                                <field name="insurance_company_id" class="oe_inline"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="subscriber_id"/>
+                                <field name="medical_number"/>
+                                <field name="rate"/>
+                                <field name="patient_name"/>
+                                <field name="patient_number"/>
+                            </group>
+                            <group>
+                                <field name="employee"/>
+                                <field name="phone"/>
+                                <field name="product_id" readonly="1"/>
+                                <field name="code" readonly="1"/>
+                                <field name="active"/>
+                                <field name="expired_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="medical_insurance_search" model="ir.ui.view">
+            <field name="name">medical.insurance.search</field>
+            <field name="model">medical.insurance</field>
+            <field name="arch" type="xml">
+                <search string="Medical Insurance">
+                    <field name="subscriber_id" required="1"/>
+                    <field name="patient_number"/>
+                    <field name="rate"/>
+                    <field name="medical_number"/>
+                    <field name="patient_name"/>
+                    <field name="phone"/>
+                    <field name="insurance_company_id"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_medical_insurance">
+            <field name="name">Medical Insurance</field>
+            <field name="res_model">medical.insurance</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_medical_insurance_orders" model="ir.actions.act_window">
+            <field name="name">Medical insurance orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pos.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="view_id" eval="False"/>
+            <field name="domain">[('medical_insurance_id', '!=', None)]</field>
+        </record>
+
+        <record id="action_res_partner_medical_insurance_companies" model="ir.actions.act_window">
+            <field name="name">Medical insurance companies</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="domain">[('is_company', '=', True)]</field>
+            <field name="context">{'is_company': True}</field>
+        </record>
+
+        <menuitem id="menu_medical"
+                  name="Medical"
+                  parent="point_of_sale.menu_point_root"
+                  groups="point_of_sale.group_pos_manager"
+        />
+
+        <menuitem id="menu_action_medical_insurance"
+                  parent="menu_medical"
+                  sequence="10"
+                  action="action_medical_insurance"
+        />
+
+        <menuitem id="menu_action_medical_insurance_orders"
+                  parent="menu_medical"
+                  sequence="20"
+                  action="action_medical_insurance_orders"
+        />
+
+        <menuitem id="menu_action_res_partner_medical_insurance_companies"
+                  parent="menu_medical"
+                  sequence="30"
+                  action="action_res_partner_medical_insurance_companies"
+        />
+
+    </data>
+</odoo>

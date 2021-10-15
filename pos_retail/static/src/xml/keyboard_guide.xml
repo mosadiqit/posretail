@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xmlspace="preserve">
+
+    <t t-name="hide_keyboard_guide_widget">
+        <div class="oe_status js_synch" style="max-width 20px;margin-left -5px;">
+            <span class='js_msg oe_hidden'>0</span>
+            <div class="js_connected oe_icon">
+                <i class='fa fa-keyboard' role="img" aria-label="Keyboard Guide" title="Keyboard Guide"></i>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="KeyBoard_Guide_Widget">
+        <div class="debug-widget oe_hidden">
+            <h1>Keyboard Shortcut</h1>
+            <div class="toggle"><i class='fa fa-times' /></div>
+            <div class="content">
+                <p class="category">Products Screen (Scroll Your Mouse View more ...)</p>
+                <ul>
+                    <li class="button">Number <span class="guide">0 to 9</span></li>
+                    <li class="button">Plus/Reduce +- 1 <span class="guide">+/-</span></li>
+                    <li class="button">Clear Input <span class="guide">Backspace</span></li>
+                    <li class="button">Remove Selected Line <span class="guide">Del</span></li>
+                    <li class="button">Search Products <span class="guide">s</span></li>
+                    <li class="button">Search Client (mobile/email) <span class="guide">k</span></li>
+                    <li class="button">Clear Search Box <span class="guide">ESC</span></li>
+                    <li class="button">Change mode Quantity <span class="guide">q</span></li>
+                    <li class="button">Change mode Discount <span class="guide">d</span></li>
+                    <li class="button">Change mode Price <span class="guide">p</span></li>
+                    <li class="button">Auto Register Payment Full Amount <span class="guide">f</span></li>
+                    <li class="button">Focus Your Mouse to Search Products Box <span class="guide">s</span></li>
+                    <li class="button">Focus Your Mouse to Search Partner Box <span class="guide">k</span></li>
+                    <li class="button">Add New Order <span class="guide">n</span></li>
+                    <li class="button">Remove Current Order <span class="guide">r</span></li>
+                    <li class="button">Add New Customer <span class="guide">a</span></li>
+                    <li class="button">Add New Product <span class="guide">e</span></li>
+                    <li class="button">Add New POS Category <span class="guide">w</span></li>
+                    <li class="button">Switch Product View <span class="guide">v</span></li>
+                    <li class="button">Show/Hide Buttons Layout <span class="guide">b</span></li>
+                    <li class="button">Show/Hide Numpad Layout <span class="guide">h</span></li>
+                    <li class="button">Lock Screen <span class="guide">l</span></li>
+                    <li class="button">Go Orders Screen <span class="guide">o</span></li>
+                    <li class="button">Go Invoices Screen <span class="guide">i</span></li>
+                    <li class="button">Go Clients screen <span class="guide">c</span></li>
+                    <li class="button">Go Payment Screen <span class="guide">Space</span></li>
+                </ul>
+
+                <p class="category">Payment Screen</p>
+                <ul>
+                    <li class="button">Input number <span class="guide">0 to 9</span></li>
+                    <li class="button">Back Products Screen <span class="guide">b or esc</span></li>
+                    <li class="button">Prefill Cash Payment <span class="guide">f</span></li>
+                    <li class="button">Parital Payment <span class="guide">p</span></li>
+                    <li class="button">Validate <span class="guide">Space</span></li>
+                    <li class="button">Set Customer <span class="guide">c</span></li>
+                    <li class="button">Input Voucher <span class="guide">v</span></li>
+                    <li class="button">Signature Receipt <span class="guide">s</span></li>
+                    <li class="button">Set Note <span class="guide">n</span></li>
+                    <li class="button">Set Invoice <span class="guide">i</span></li>
+                    <li class="button">Set Change Due to Wallet <span class="guide">w</span></li>
+                </ul>
+            </div>
+        </div>
+    </t>
+
+</templates>

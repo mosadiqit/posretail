@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_pricelist_view" model="ir.ui.view">
+            <field name="name">product.pricelist.form</field>
+            <field name="inherit_id" ref="product.product_pricelist_view"/>
+            <field name="model">product.pricelist</field>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name="sync_pricelists_all_pos_online"
+                                string="Sync pricelist to pos sessions online"
+                                type="object"
+                                groups="point_of_sale.group_pos_manager" class="btn-primary"/>
+                    </header>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- v11 only
+        <record id="view_sale_order_line_form" model="ir.ui.view">
+            <field name="name">sale.order.line.form</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <form string="Sales Order Lines" create="false">
+                    <header>
+                        <button name="insert_and_close" string="Insert and close" type="object" class="btn-primary"/>
+                        <button name="insert_new" string="Insert row" type="object" class="btn-primary"/>
+                        <button name="insert_continue" string="Insert continue" type="object" class="btn-primary"/>
+                    </header>
+                    <group>
+                        <group>
+                            <field name="order_id" invisible="1"/>
+                            <field name="insert" invisible="1"/>
+                            <field name="product_updatable" invisible="1"/>
+                            <field name="product_id"
+                                   context="{'quantity':product_uom_qty, 'uom':product_uom}"
+                                   attrs="{'readonly': [('product_updatable', '=', False)]}"
+                                   force_save="1"
+                            />
+                            <field name="layout_category_id" groups="sale.group_sale_layout"/>
+                            <field name="invoice_status" invisible="1"/>
+                            <field name="qty_to_invoice" invisible="1"/>
+                            <field name="qty_delivered_updateable" invisible="1"/>
+                            <field name="price_subtotal" invisible="1"/>
+                            <label for="product_uom_qty" string="Ordered Quantity"/>
+                            <div>
+                                <field
+                                        context="{'quantity':product_uom_qty, 'uom':product_uom, 'uom_qty_change':True}"
+                                        name="product_uom_qty" class="oe_inline"/>
+                                <field name="product_uom" groups="product.group_uom" class="oe_inline oe_no_button"/>
+                            </div>
+                            <field name="price_unit"/>
+                            <label for="discount" groups="sale.group_discount_per_so_line"/>
+                            <div name="discount" groups="sale.group_discount_per_so_line">
+                                <field name="discount" class="oe_inline"/>
+                                %%
+                            </div>
+                        </group>
+                        <group>
+                            <field name="tax_id" widget="many2many_tags" options="{'no_create': True}"
+                                   domain="[('type_tax_use','=','sale')]"
+                                   />
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+        -->
+
+        <record id="booking_order_quotation_tree" model="ir.ui.view">
+            <field name="name">quotation.tree.retail.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="book_order"/>
+                    <field name="delivery_phone"/>
+                    <field name="delivery_date"/>
+                    <field name="delivery_address"/>
+                    <field name="delivered_date"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="booking_order_sale_tree" model="ir.ui.view">
+            <field name="name">sale.order.tree.retail.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="ean13"/>
+                    <field name="book_order"/>
+                    <field name="delivery_phone"/>
+                    <field name="delivery_date"/>
+                    <field name="delivery_address"/>
+                    <field name="delivered_date"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="booking_order_sale_form" model="ir.ui.view">
+            <field name="name">sale.order.form.retail.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="ean13"/>
+                    <field name="book_order"/>
+                    <field name="delivery_phone" attrs="{'invisible': [('book_order', '=', False)]}"/>
+                    <field name="delivery_address" attrs="{'invisible': [('book_order', '=', False)]}"/>
+                    <field name="delivered_date" attrs="{'invisible': [('book_order', '=', False)]}"/>
+                    <field name="payment_partial_amount" attrs="{'invisible': [('book_order', '=', False)]}"/>
+                    <field name="payment_partial_journal_id" attrs="{'invisible': [('book_order', '=', False)]}"/>
+                    <field name="signature" widget='image' readonly="1"
+                           attrs="{'invisible': [('book_order', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']//tree/field[@name='state']" position="before">
+                    <field name="variant_ids" widget="many2many_tags"/>
+                    <field name="pos_note"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_book_orders" model="ir.actions.act_window">
+            <field name="name">Booked orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="sale.view_quotation_tree"/>
+            <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+            <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+            <field name="domain">[('book_order', '=', True)]</field>
+        </record>
+
+        <menuitem id="menu_action_book_orders"
+                  action="action_book_orders"
+                  parent="sale.sale_order_menu"
+                  sequence="10" groups="sales_team.group_sale_salesman"/>
+
+    </data>
+</odoo>

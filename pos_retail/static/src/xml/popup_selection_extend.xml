@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="sale_persons">
+        <t t-set="count" t-value="1"/>
+        <tr style="border-bottom: 1px solid">
+            <td class="text-center"></td>
+            <td class="text-left">Name</td>
+            <td class="text-left">Email</td>
+        </tr>
+        <t t-foreach="sub_datas || []" t-as="user">
+            <tr class='line-select' t-att-data-id="user.id">
+                <td class="text-center"><t t-esc="count"/></td>
+                <td class="text-left"><t t-esc="user.name"/> </td>
+                <td class="text-left"><t t-esc="user.email"/></td>
+            </tr>
+            <t t-set="count" t-value="count + 1"/>
+        </t>
+    </t>
+
+    <t t-name="clients_list">
+        <t t-set="count" t-value="1"/>
+        <tr style="border-bottom: 1px solid">
+            <td class="text-center"></td>
+            <td class="text-left">Name</td>
+            <td class="text-left">Email</td>
+            <td class="text-left">Mobile</td>
+            <td class="text-left">Phone</td>
+        </tr>
+        <t t-foreach="sub_datas || []" t-as="client">
+            <tr class='line-select' t-att-data-id="client.id">
+                <td class="text-center"><t t-esc="count"/></td>
+                <td class="text-left"><t t-esc="client.name"/> </td>
+                <td class="text-left"><t t-if="client.email"><t t-esc="client.email"/></t> </td>
+                <td class="text-left"><t t-if="client.phone"><t t-esc="client.phone"/></t></td>
+                <td class="text-left"><t t-if="client.mobile"><t t-esc="client.mobile"/></t></td>
+            </tr>
+            <t t-set="count" t-value="count + 1"/>
+        </t>
+    </t>
+
+    <t t-name="purchased_orders">
+        <t t-set="count" t-value="1"/>
+        <tr style="border-bottom: 1px solid">
+            <td class="text-center"></td>
+            <td class="text-left">Name</td>
+            <td class="text-left">Ean13</td>
+            <td class="text-left">Order Date</td>
+            <td class="text-left">Ref</td>
+            <td class="text-right">Amount Total</td>
+            <td class="text-right">State</td>
+            <td class="text-left"></td>
+        </tr>
+        <t t-foreach="sub_datas || []" t-as="order">
+            <tr class='line-select' t-att-data-id="order.id">
+                <td class="text-center"><t t-esc="count"/></td>
+                <td class="text-left"><t t-esc="order.name"/> </td>
+                <td class="text-left"><t t-if="order.ean13"><t t-esc="order.ean13"/></t> </td>
+                <td class="text-left"><t t-if="order.date_order"><t t-esc="order.date_order"/></t> </td>
+                <td class="text-left"><t t-if="order.pos_reference"><t t-esc="order.pos_reference"/></t> </td>
+                <td class="text-right"><t t-if="order.amount_total"><t t-esc="widget.pos.gui.chrome.format_currency(order.amount_total)"/></t></td>
+                <td class="text-right"><t t-if="order.state"><t t-esc="order.state"/></t></td>
+                <td class="text-left"></td>
+            </tr>
+            <t t-set="count" t-value="count + 1"/>
+        </t>
+    </t>
+
+    <t t-name="purchased_lines">
+        <t t-set="count" t-value="1"/>
+        <tr style="border-bottom: 1px solid">
+            <td class="text-center"></td>
+            <td class="text-left">Order Date</td>
+            <td class="text-left">Create By</td>
+            <td class="text-left">Order Ref</td>
+            <td class="text-right">Product</td>
+            <td class="text-right">Qty</td>
+            <td class="text-right">Price Unit</td>
+            <td class="text-right">Sub Total</td>
+            <td class="text-left"></td>
+        </tr>
+        <t t-foreach="sub_datas || []" t-as="line">
+            <tr class='line-select' t-att-data-id="line.product_id[0]">
+                <td class="text-center"><t t-esc="count"/></td>
+                <td class="text-left"><t t-esc="line.create_date"/> </td>
+                <td class="text-left"><t t-esc="line.create_uid[1]"/> </td>
+                <td class="text-left"><t t-esc="line.order_id[1]"/> </td>
+                <td class="text-right"><t t-esc="line.product_id[1]"/> </td>
+                <td class="text-right"><t t-esc="line.qty"/> </td>
+                <td class="text-right"><t t-esc="widget.pos.gui.chrome.format_currency(line.price_unit)"/> </td>
+                <td class="text-right"><t t-esc="widget.pos.gui.chrome.format_currency(line.price_subtotal_incl)"/> </td>
+                <td class="text-left"></td>
+            </tr>
+            <t t-set="count" t-value="count + 1"/>
+        </t>
+    </t>
+
+    <t t-name="stocks_list">
+        <t t-set="count" t-value="1"/>
+        <tr style="border-bottom: 1px solid">
+            <td class="text-center"></td>
+            <td class="text-left">Location Name</td>
+            <td class="text-left">On Hand</td>
+        </tr>
+        <t t-foreach="sub_datas || []" t-as="stock">
+            <tr class='line-select' t-att-data-id="stock.id">
+                <td class="text-center"><t t-esc="count"/></td>
+                <td class="text-left"><t t-esc="stock.location"/> </td>
+                <td class="text-left"><t t-esc="stock.qty_available"/> </td>
+            </tr>
+            <t t-set="count" t-value="count + 1"/>
+        </t>
+    </t>
+
+    <t t-name="popup_selection_extend">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y" style="width: 900px; min-height: 500px">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <span class='searchbox'>
+                                <input class='popup-seachbox' placeholder='Search More Here ...'/>
+                                <span class='search-clear'></span>
+                            </span>
+                        </div>
+                    </div>
+                    <t t-if="widget.options.title">
+                        <h4 class="card-title">
+                            <t t-esc="widget.options.title"/>
+                        </h4>
+                    </t>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <span class="card-issue"/>
+                <div class="form-footer text-center">
+                    <div class="btn btn-danger pull-left cancel">
+                        Close
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

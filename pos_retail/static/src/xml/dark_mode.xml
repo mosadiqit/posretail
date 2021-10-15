@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="dark_mode_widget">
+        <div class="oe_status js_synch">
+            <span class='js_msg oe_hidden'>0</span>
+            <div class="js_connected oe_icon">
+                <i style="color: #fff" class='fa fa-fw fa-lightbulb-o oe_green' role="img" aria-label="Go Dark Mode" title="Go Dark Mode"></i>
+            </div>
+            <div class="js_connecting oe_icon oe_hidden">
+                <i style="color: #FFEB3B" class='fa fa-fw fa-moon-o oe_green' role="img" aria-label="Go Light Mode" title="Go Light Mode"></i>
+            </div>
+        </div>
+    </t>
+
+</templates>

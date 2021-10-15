@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="return_products">
+        <div class="clientlist-screen screen">
+            <div class="full_width screen-content">
+                <sector class="top-content">
+                    <span class="button back">
+                        <i class="fa fa-angle-double-left"></i>
+                        Cancel
+                    </span>
+                    <span class='searchbox search_return_products'>
+                        <input placeholder='Search Products' />
+                        <span class='search-clear'></span>
+                    </span>
+                    <span class='searchbox'></span>
+                    <span class="button confirm_return highlight">Return</span>
+                </sector>
+                <section class="full-content">
+                    <div class='window'>
+                        <section class='subwindow'>
+                            <div class='subwindow-container'>
+                                <div class='subwindow-container-fix touch-scrollable scrollable-y'>
+                                    <table class="client-list">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center"></th>
+                                                <th>Internal Ref</th>
+                                                <th>Name</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody class='client-list-contents'>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="product_return_row">
+        <tr class='product_row' t-att-data-id='product.id'>
+            <td>
+                <img t-att-src='widget.product_icon_url(product.id)' class="image-row"/>
+            </td>
+            <td>
+                <t t-if="product.default_code">
+                    <t t-esc='product.default_code'/>
+                </t>
+            </td>
+            <td>
+                <t t-esc='product.display_name'/>
+            </td>
+            <td>
+                <t t-if="!product['price_return']">
+                    - <t t-esc='widget.format_currency(product["list_price"])'/>
+                </t>
+                <t t-if="product['price_return']">
+                    - <t t-esc='widget.format_currency(product["price_return"])'/>
+                </t>
+            </td>
+            <td>
+                <t t-esc='product.quantity_return || 1'/>
+            </td>
+            <td class="td-actions text-right">
+                <button type="button" rel="tooltip" class="btn btn-info btn-round quantity">
+                    <i class="fa fa-plus">Quantity Return</i>
+                </button>
+                <button type="button" rel="tooltip" class="btn btn-success btn-round edit_amount">
+                    <i class="fa fa-check">Amount Return</i>
+                </button>
+                <button type="button" rel="tooltip" class="btn btn-danger btn-round remove">
+                    <i class="fa fa-trash">Remove Item</i>
+                </button>
+            </td>
+        </tr>
+    </t>
+
+</templates>

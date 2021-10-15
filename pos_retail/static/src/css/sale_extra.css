@@ -1,0 +1,40 @@
+.pos .product-list-sale-extra {
+    height: auto;
+    max-height: 300px;
+    padding: 5px;
+    margin: 5px;
+    display: flex;
+    vertical-align: top;
+    overflow: auto;
+    overflow-y: auto;
+    margin-left: 5px;
+}
+.pos .sale_extra {
+    color: blue;
+    margin-left: 10px;
+    font-size: 14px;
+    
+}
+.pos .up_quantity {
+    cursor: pointer;
+    color:green;
+    font-size:15px;
+    padding-right:15px
+}
+.pos .down_quantity {
+    cursor: pointer;
+    color:blue;
+    font-size:15px;
+    padding-right:15px
+}
+.pos .remove_sale_extra {
+    cursor: pointer;
+    float: right;
+    color:red;
+    font-size:20px
+}
+.pos .remove_sale_extra_item_logo {
+    max-width: 20px;
+    max-height: 20px;
+    float: right;
+}

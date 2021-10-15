@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="Chrome">
+        <t t-jquery="div[class*='pos']" t-operation="append">
+            <div class='oe_hidden' id="livestream_scanner">
+                <div id="interactive" class="viewport"></div>
+                <div class="error"></div>
+            </div>
+        </t>
+    </t>
+
+</templates>

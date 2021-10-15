@@ -1,0 +1,90 @@
+.pos.dark .pos-content {
+    background: #000000;
+}
+
+.pos.dark .quickly_icon_label {
+    color: white !important;
+}
+
+/*.pos.dark .actionpad .button.set-customer {*/
+/*    background: #000000 !important;*/
+/*    color: white !important;*/
+/*}*/
+.pos.dark .buttons_pane {
+    background: #000000 !important;
+    height: 100%;
+}
+/*.pos.dark .actionpad .button.pay {*/
+/*    background: #000000 !important;*/
+/*    color: white !important;*/
+/*}*/
+
+/*.pos.dark .numpad button {*/
+/*    background: #000000;*/
+/*    color: white !important;*/
+/*}*/
+
+.screen .right-content.pc60.dark {
+    background: #000000 !important;
+    color: white !important;
+}
+.pos.dark .breadcrumb >i {
+    color: white;
+}
+.pos.dark .payment-screen .label {
+    color: #FFFFFF !important;
+}
+.screen .left-content.pc40.dark {
+    background: #000000 !important;
+    color: white !important;
+}
+.pos.dark .screen p {
+    color: white !important;
+}
+.pos.dark .receipt-screen {
+    background: #000000 !important;
+    color: white !important;
+}
+.screen.dark .top-content h1 {
+    color: white !important;
+}
+.pos.dark .payment-numpad .numpad button {
+    background: #ffffff !important;
+    color: black !important;
+}
+.pos.dark .icon_line_logo {
+    background: #fff !important;
+    color: white !important;
+}
+.pos.dark .product-list-container .list tr {
+    color: white !important;
+    background: #000000 !important;
+}
+.pos.dark .sort {
+    color: white;
+}
+.pos.dark .client-list .sort {
+    color: #000000 !important;
+}
+.paylater-list.dark thead th {
+    background: #000000;
+}
+.pos.dark .paylaterlist-screen .paylater-list {
+    color: white
+}
+.pos.dark .paylaterlist-screen .paylater-list td {
+    color: white
+}
+.pos.dark .product-order-name {
+    color: white
+}
+.pos.dark .receipt-screen .centered-content .button {
+    background: white !important;
+    color: #000000 !important;
+}
+.pos.dark .actionpad .button.set-customer:hover {
+   background: #6EC89B;
+}
+/*.pos.dark .actionpad .button.pay:hover {*/
+/*    background: #6EC89B;*/
+/*}*/

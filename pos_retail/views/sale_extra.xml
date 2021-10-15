@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="pos_sale_extra_form" model="ir.ui.view">
+            <field name="name">pos.sale.extra.form</field>
+            <field name="model">pos.sale.extra</field>
+            <field name="arch" type="xml">
+                <form string="Sale extra item">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="product_tmpl_id"/>
+                                <field name="product_id"/>
+                            </group>
+                            <group>
+                                <field name="quantity"/>
+                                <field name="list_price"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="pos_sale_extra_tree" model="ir.ui.view">
+            <field name="name">pos.sale.extra.tree</field>
+            <field name="model">pos.sale.extra</field>
+            <field name="arch" type="xml">
+                <tree string="Sale extra item">
+                    <field name="product_tmpl_id"/>
+                    <field name="product_id"/>
+                    <field name="quantity"/>
+                    <field name="list_price"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pos_sale_extra_search" model="ir.ui.view">
+            <field name="name">pos.sale.extra.filter</field>
+            <field name="model">pos.sale.extra</field>
+            <field name="arch" type="xml">
+                <search string="Sale extra item">
+                    <field name="product_tmpl_id"/>
+                    <field name="product_id"/>
+                    <field name="quantity"/>
+                    <field name="list_price"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_pos_sale_extra">
+            <field name="name">Sale Extra List</field>
+            <field name="res_model">pos.sale.extra</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_action_pos_sale_extra"
+                  action="action_pos_sale_extra"
+                  parent="menu_master_data"
+                  sequence="22"
+        />
+
+    </data>
+</odoo>

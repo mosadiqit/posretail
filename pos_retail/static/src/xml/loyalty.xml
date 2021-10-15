@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="reward_button">
+        <div class="left_button" title="Click and choice Reward Program need apply to Client">
+            <div class="button-icon">
+                <img src="/pos_retail/static/src/icons/rewards.png" class="pos_logo"/>
+            </div>
+            <div class="button-name">
+                Rewards Program
+            </div>
+        </div>
+    </t>
+
+    <t t-extend="ClientDetails">
+        <t t-jquery="div[class*='client-details-right']" t-operation="append">
+            <div class='client-detail'>
+                <span class='label'>Points</span>
+                <span class='detail'><t t-esc='widget.format_currency_no_symbol(partner.pos_loyalty_point || 0.00)'/></span>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="OrderWidget">
+        <t t-jquery="div[class*='summary']" t-operation="before">
+            <t t-if="widget.pos.loyalty and widget.pos.get_order()">
+                <table class="loyalty-table">
+                    <thead>
+                        <tr class="header-loyalty">
+                            <th>
+                                Client Points
+                            </th>
+                            <th>
+                                Redeem
+                            </th>
+                            <th>
+                                Remaining
+                            </th>
+                            <th>
+                                Plus
+                            </th>
+                            <th>
+                                Future Points
+                            </th>
+                        </tr>
+                        <tr class="header-loyalty">
+                            <th>
+                                <span class='value client_point'>
+                                    <t t-esc="widget.format_currency_no_symbol(widget.pos.get_order().get_client_point()['client_point'])"/>
+                                </span>
+                            </th>
+                            <th>
+                                 <span class='value redeem_point'>
+                                    <t t-esc="widget.format_currency_no_symbol(widget.pos.get_order().get_client_point()['redeem_point'])"/>
+                                </span>
+                            </th>
+                            <th>
+                                <span class='value remaining_point'>
+                                    <t t-esc="widget.format_currency_no_symbol(widget.pos.get_order().get_client_point()['remaining_point'])"/>
+                                </span>
+                            </th>
+                            <th>
+                                <span class='value plus_point'>
+                                    <t t-esc="widget.format_currency_no_symbol(widget.pos.get_order().get_client_point()['plus_point'])"/>
+                                </span>
+                            </th>
+                            <th>
+                                <span class='value next_point'>
+                                    <t t-esc="widget.format_currency_no_symbol(widget.pos.get_order().get_client_point()['next_point'])"/>
+                                </span>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </t>
+        </t>
+    </t>
+
+    <!--    <t t-extend="Orderline">-->
+    <!--        <t t-jquery="ul[class*='info-list']:first .info" t-operation="append">-->
+    <!--            <t t-if="line.plus_point">-->
+    <!--                <img src="/pos_retail/static/src/icons/medal.png" class="order_line_logo"/>-->
+    <!--                <span class="line_plus_point">-->
+    <!--                    + <t t-esc="line.plus_point" /> (point)-->
+    <!--                </span>-->
+    <!--            </t>-->
+    <!--            <t t-if="line.redeem_point">-->
+    <!--                <img src="/pos_retail/static/src/icons/medal.png" class="order_line_logo"/>-->
+    <!--                <span class="line_redeem_point">-->
+    <!--                    <t t-esc="line.redeem_point" /> (point)-->
+    <!--                </span>-->
+    <!--            </t>-->
+    <!--        </t>-->
+    <!--    </t>  only single app-->
+
+
+</templates>

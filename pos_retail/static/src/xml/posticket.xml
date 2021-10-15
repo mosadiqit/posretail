@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="orderlines_list">
+        <t t-foreach="orderlines" t-as="orderline">
+            <div class="orderline">
+                <span class="product-name" style="width: 55%;box-sizing: border-box;display: inline-block;">
+                    <t t-if="widget.pos.config.display_image_receipt">
+                        <img class='orderline_image' t-att-src="orderline.get_line_image()"/>
+                    </t>
+                    <t t-esc="orderline.get_product().display_name"/>
+                    <div>
+                        <t t-esc="widget.format_currency(orderline.get_unit_display_price(),'Product Price')"/>
+                        / 1
+                        <t t-esc="orderline.get_unit().name"/>
+                    </div>
+                    <t t-if="orderline.get_discount() > 0">
+                        <div>
+                            With a <t t-esc="orderline.get_discount()"/>% discount
+                        </div>
+                    </t>
+                    <t t-if="widget.pos.config.display_tax_receipt and orderline.get_tax() > 0">
+                        <div>
+                            Tax: <t t-esc="widget.format_currency(orderline.get_tax().toFixed(2))"/>
+                        </div>
+                    </t>
+                    <t t-if="orderline.pack_lot_lines and orderline.pack_lot_lines.models">
+                        <t t-foreach="orderline.pack_lot_lines.models" t-as="lot_model">
+                            <div>
+                                Lot: <t t-esc="lot_model['attributes']['lot_name']"/>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-if="orderline.combo_items">
+                        <t t-foreach="orderline.combo_items" t-as="combo_item">
+                            <div>
+                                <t t-esc="combo_item.product_id[1]"/>
+                                With qty:
+                                <t t-esc="combo_item.quantity * orderline['quantity']"/>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-if="orderline.get_line_note()">
+                        <div>
+                            <t t-esc="orderline.get_line_note()"/>
+                        </div>
+                    </t>
+                    <t t-if="orderline.variants">
+                        <t t-foreach="orderline.variants" t-as="variant">
+                            <div>
+                                <t t-esc="variant.value_id[1]"/>
+                                with
+                                <t t-esc="widget.format_currency(variant.price_extra, 'Price extra')"/>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-if="orderline.tags">
+                        <t t-foreach="orderline.tags" t-as="tag">
+                            <div>
+                                <span class='bus-info' t-att-data-id="tag.id">
+                                    <i class="fa fa-tag"/>
+                                    <t t-esc="tag.name"/>
+                                </span>
+                            </div>
+                        </t>
+                    </t>
+                </span>
+                <span class="qty" style="width: 10%;vertical-align: top;">
+                    <t t-esc="orderline.get_quantity_str_with_unit()"/>
+                </span>
+                <span class="price" style="float: right;display: inline-block;">
+                    <t t-if="!widget.pos.config.subtotal_tax_included">
+                        <t t-esc="widget.format_currency(orderline.get_display_price())"/>
+                    </t>
+                    <t t-if="widget.pos.config.subtotal_tax_included">
+                        <t t-esc="widget.format_currency(orderline.get_price_with_tax())"/>
+                    </t>
+                </span>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="PosTicket">
+        <t t-jquery="br" t-operation="replace"/>
+        <t t-jquery="div[class*='pos-center-align']" t-operation="replace">
+            <div class="pos-center-align">
+                <t t-if="order.formatted_validation_date">
+                    <t t-esc="order.formatted_validation_date"/> |
+                </t>
+                <t t-if="order.create_date">
+                    <t t-esc="order.create_date"/> |
+                </t>
+                <t t-if="order.pos_reference">
+                    <t t-esc="order.pos_reference"/>
+                </t>
+                <t t-if="!order.pos_reference">
+                    <t t-esc="order.name"/>
+                </t>
+            </div>
+            <t t-if="widget.pos.config.show_order_unique_barcode">
+                <img id="barcode_order_unique"
+                     class="barcode_receipt oe_hidden"
+                     style="padding-left: 30px;
+                            height: 50px;
+                            width: 80px;
+                            float: right;"/>
+            </t>
+        </t>
+        <t t-jquery="div[class*='receipt-user']" t-operation="replace">
+            <t t-if="widget.pos.get_cashier() and !receipt.employee">
+                <div class="receipt-user">
+                    Seller: <t t-esc="widget.pos.get_cashier().name"/>
+                </div>
+            </t>
+            <t t-if="receipt.employee">
+                <div class="receipt-user">
+                    Employee: <t t-esc="receipt.employee.name"/>
+                </div>
+            </t>
+            <t t-if="order.get_client()">
+                <div class="receipt-user">
+                    Customer: <t t-esc="order.get_client().name"/>
+                </div>
+            </t>
+        </t>
+        <t t-jquery="t[t-if*='receipt.header']" t-operation="before">
+            <t t-if="order.plus_point">
+                <div class="receipt-user">
+                    Points Plus: <t t-esc="order.plus_point"/>
+                </div>
+            </t>
+            <t t-if="order.redeem_point">
+                <div class="receipt-usern">
+                    Points Redeem: <t t-esc="order.redeem_point"/>
+                </div>
+            </t>
+            <t t-if="order.location">
+                <div class="receipt-user">
+                    Location: <t t-esc="order.location.name"/>
+                </div>
+            </t>
+            <t t-if="widget.pos.config.booking_orders_display_shipping_receipt">
+                <t t-if="order.delivery_address">
+                    <div class="receipt-user">
+                        Shipping to: <t t-esc="order.delivery_address"/>
+                    </div>
+                </t>
+                <t t-if="order.delivery_date">
+                    <div class="receipt-user">
+                        Delivery Date: <t t-esc="order.delivery_date"/>
+                    </div>
+                </t>
+                <t t-if="order.delivery_phone">
+                    <div class="receipt-user">
+                        Delivery Phone: <t t-esc="order.delivery_phone"/>
+                    </div>
+                </t>
+            </t>
+            <t t-if="widget.pos.config.display_fiscal_position_receipt and order.fiscal_position">
+                <div class="receipt-user">
+                    Fiscal Position: <t t-esc="order.fiscal_position.name"/>
+                </div>
+            </t>
+            <t t-set="client" t-value="order.get_client()"/>
+            <t t-if="client and widget.pos.config.receipt_customer_vat">
+                <t t-set="client" t-value="order.get_client()"/>
+                <div class="receipt-user">
+                        Name: <t t-esc="client['name']"/>
+                    </div>
+                <t t-if="client['street']">
+                    <div class="receipt-user">
+                        Street: <t t-esc="client['street']"/>
+                    </div>
+                </t>
+                <t t-if="client['vat']">
+                    <div class="receipt-user">
+                        Tin: <t t-esc="client['vat']"/>
+                    </div>
+                </t>
+                <t t-if="client['email']">
+                    <div class="receipt-user">
+                        Email: <t t-esc="client['email']"/>
+                    </div>
+                </t>
+                <t t-if="client['phone'] or client['mobile']">
+                    <div class="receipt-user">
+                        Phone or Mobile: <t t-esc="client['phone'] || client['mobile']"/>
+                    </div>
+                </t>
+            </t>
+            <t t-if="order.invoice_number and widget.pos.config.receipt_invoice_number">
+                <div class="receipt-user">
+                    Invoice: <t t-esc="order.invoice_number"/>
+                </div>
+            </t>
+        </t>
+
+        <t t-jquery="table[class*='receipt-orderlines']" t-operation="replace">
+            <div class="order-widget-title" style="width: 100%;
+                                                    margin-bottom: 5px;
+                                                    border-bottom: dashed 1px #e6e6e6;
+                                                    cursor: pointer;
+                                                    -webkit-box-sizing: border-box;
+                                                    -moz-box-sizing: border-box;
+                                                    -ms-box-sizing: border-box;
+                                                    box-sizing: border-box;
+                                                    -webkit-transition: background 250ms ease-in-out;
+                                                    -moz-transition: background 250ms ease-in-out;
+                                                    transition: background 250ms ease-in-out;
+                                                    font-weight: bold;
+                                                    height: 30px;
+                                                    border-bottom:dashed 1px #555555;
+                                                    line-height: 30px;">
+                <span class="title-name" style="display: inline-block;width: 55%;font-size: 13px;">
+                    Name
+                </span>
+                <span class="title-qty" style="font-size: 13px;">
+                    Qty
+                </span>
+                <span class="title-price" style="float: right;font-size: 13px;">
+                    Sub Total
+                </span>
+            </div>
+            <t t-if="widget.pos.config.category_wise_receipt">
+                <t t-set='index' t-value="1"/>
+                <t t-foreach="receipt['orderlines_by_category_name']" t-as="category">
+                    <t t-set='orderlines' t-value="receipt['orderlines_by_category_name'][category]"/>
+                    <li class="orderline">
+                        <span class="product-name"><t t-esc="index"/>.
+                            <t t-esc='category'/></span>
+                        <span class="qty">
+                            With
+                        </span>
+                        <span class="price">
+                            <t t-if="orderlines.length == 1">
+                                (1) Item
+                            </t>
+                            <t t-if="orderlines.length > 1">
+                                (<t t-esc='orderlines.length'/>) Items
+                            </t>
+                        </span>
+                    </li>
+                    <t t-set='index' t-value="index + 1"/>
+                    <t t-call="orderlines_list"/>
+                </t>
+            </t>
+            <t t-if="!widget.pos.config.category_wise_receipt">
+                <t t-set='orderlines' t-value="orderlines"/>
+                <t t-call="orderlines_list"/>
+            </t>
+        </t>
+        <t t-jquery="table[class*='receipt-total']" t-operation="replace">
+            <table class='receipt-total' style="width: 100%">
+                <tr>
+                    <td style="font-weight: 900; text-transform:uppercase">Subtotal:</td>
+                    <td class="pos-right-align" style="text-align: right; font-weight: 900;">
+                        <t t-esc="widget.format_currency(order.get_total_without_tax())"/>
+                    </td>
+                </tr>
+                <t t-foreach="order.get_tax_details()" t-as="taxdetail">
+                    <tr>
+                        <td><t t-esc="taxdetail.name" /></td>
+                        <td class="pos-right-align" style="text-align: right">
+                            <t t-esc="widget.format_currency(taxdetail.amount)"/>
+                        </td>
+                    </tr>
+                </t>
+                <tr>
+                    <t t-if="order.get_total_discount() > 0">
+                        <td style="font-weight: 900; text-transform:uppercase">Discount:</td>
+                        <td class="pos-right-align" style="text-align: right">
+                            <t t-esc="widget.format_currency(order.get_total_discount())"/>
+                        </td>
+                    </t>
+                </tr>
+                <tr class="emph">
+                    <td style="font-weight: 900; text-transform:uppercase">Total:</td>
+                    <td class="pos-right-align" style="text-align: right; font-weight: 900;">
+                        <t t-esc="widget.format_currency(order.get_total_with_tax())"/>
+                    </td>
+                </tr>
+            </table>
+        </t>
+        <t t-jquery="table[class*='receipt-change']" t-operation="replace">
+            <table class='receipt-change' style="width: 100%">
+                <tr>
+                    <td>Change:</td>
+                    <td class="pos-right-align" style="text-align: right">
+                        <t t-esc="widget.format_currency(order.get_change())"/>
+                    </td>
+                </tr>
+            </table>
+        </t>
+        <t t-jquery="tr[class*='emph']" t-operation="after">
+            <t t-if="receipt['total_paid']">
+                <tr class="emph" style="font-weight: 900; text-transform:uppercase">
+                    <td>PAID :</td>
+                    <td class="pos-right-align" style="text-align: right">
+                        <t t-esc="widget.format_currency(receipt['total_paid'])"/>
+                    </td>
+                </tr>
+            </t>
+            <t t-if="receipt['total_due']">
+                <tr class="emph" style="font-weight: 900; text-transform:uppercase">
+                    <td>DUE :</td>
+                    <td class="pos-right-align" style="text-align: right">
+                        <t t-esc="widget.format_currency(receipt['total_due'])"/>
+                    </td>
+                </tr>
+            </t>
+            <t t-if="order.amount_debit">
+                <tr class="emph">
+                    <td>Debit :</td>
+                    <td class="pos-right-align" style="text-align: right">
+                        <t t-esc="widget.format_currency(order.amount_debit)"/>
+                    </td>
+                </tr>
+            </t>
+        </t>
+        <t t-jquery=".receipt-change" t-operation="after">
+            <t t-if="order.note">
+                <table>
+                    <t t-if="order.note">
+                        <tr>
+                            <td>Note:</td>
+                            <td class="pos-right-align">
+                                <t t-esc="order.note"/>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+            </t>
+            <t t-if="order.signature">
+                <table>
+                    <tr>
+                        <td>Signature:</td>
+                        <td class="pos-right-align">
+                            <img class="product-img signature"
+                                 t-att-src="widget.pos.get_order().get_signature() || ''"
+                                 style="max-height:400px;max-width:100px"
+                            />
+                        </td>
+                    </tr>
+                </table>
+            </t>
+        </t>
+        <t t-jquery="t[t-if*='receipt.footer']" t-operation="after">
+            <t t-if="widget.pos.config.barcode_receipt">
+                <img id="barcode" class="barcode_receipt oe_hidden"
+                     style="padding-left: 30px;height: 75px;width: 214px"/>
+            </t>
+            <t t-if="widget.pos.config.display_return_days_receipt">
+                <div class="pos-center-align" style="text-align: center">
+                    <div class='pos-expire-date' font="b">
+                        Period times return: <t t-esc="widget.pos.config.pos_order_period_return_days"/>
+                        days
+                    </div>
+                </div>
+            </t>
+        </t>
+    </t>
+
+</templates>

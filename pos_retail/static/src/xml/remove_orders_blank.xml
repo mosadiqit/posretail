@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="remove_orders_blank_widget">
+        <div class="oe_status js_synch" title="Remove Orders Blank">
+            <span class='js_msg oe_hidden'>0</span>
+            <div class="js_connected oe_icon">
+                <i class='fa fa-fw fa-trash oe_green' role="img" aria-label="Remove orders blank lines" title="Remove orders blank lines"></i>
+            </div>
+        </div>
+    </t>
+
+</templates>

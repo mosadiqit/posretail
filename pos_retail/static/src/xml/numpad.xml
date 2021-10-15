@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="NumpadWidget">
+        <t t-jquery="div[class*='numpad']" t-operation="replace">
+            <div class="numpad">
+                <t t-if="widget.pos.config.allow_numpad">
+                    <button class="input-button number-char">1</button>
+                    <button class="input-button number-char">2</button>
+                    <button class="input-button number-char">3</button>
+                </t>
+                <t t-if="!widget.pos.config.allow_numpad">
+                    <button class="input-button number-char" style="visibility: hidden">1</button>
+                    <button class="input-button number-char" style="visibility: hidden">2</button>
+                    <button class="input-button number-char" style="visibility: hidden">3</button>
+                </t>
+                <t t-if="widget.pos.config.allow_qty">
+                    <button class="mode-button" data-mode='quantity' title="Keyboard Event: q">Qty
+                    </button>
+                </t>
+                <t t-if="!widget.pos.config.allow_qty">
+                    <button class="mode-button" style="visibility: hidden">Qty
+                    </button>
+                </t>
+                <t t-if="widget.pos.config.allow_numpad">
+                    <button class="input-button number-char">4</button>
+                    <button class="input-button number-char">5</button>
+                    <button class="input-button number-char">6</button>
+                </t>
+                <t t-if="!widget.pos.config.allow_numpad">
+                    <button class="input-button number-char" style="visibility: hidden">4</button>
+                    <button class="input-button number-char" style="visibility: hidden">5</button>
+                    <button class="input-button number-char" style="visibility: hidden">6</button>
+                </t>
+                <t t-if="widget.pos.config.allow_discount">
+                    <button class="mode-button" data-mode='discount' title="Keyboard Event: d">Disc
+                        <t t-if="widget.pos.config.keyboard_event">
+                        </t>
+                    </button>
+                </t>
+                <t t-if="!widget.pos.config.allow_discount">
+                    <button class="mode-button" style="visibility: hidden">Disc
+                        <t t-if="widget.pos.config.keyboard_event">
+                        </t>
+                    </button>
+                </t>
+                <t t-if="widget.pos.config.allow_numpad">
+                    <button class="input-button number-char">7</button>
+                    <button class="input-button number-char">8</button>
+                    <button class="input-button number-char">9</button>
+                </t>
+                <t t-if="!widget.pos.config.allow_numpad">
+                    <button class="input-button number-char" style="visibility: hidden">7</button>
+                    <button class="input-button number-char" style="visibility: hidden">8</button>
+                    <button class="input-button number-char" style="visibility: hidden">9</button>
+                </t>
+                <t t-if="widget.pos.config.allow_price">
+                    <button class="mode-button" data-mode='price' title="Keyboard Event: p">Price
+                    </button>
+                </t>
+                <t t-if="!widget.pos.config.allow_price">
+                    <button class="mode-button" style="visibility: hidden">Price
+                    </button>
+                </t>
+                <t t-if="widget.pos.config.allow_numpad">
+                    <button class="input-button numpad-minus" >+/-</button>
+                    <button class="input-button number-char">0</button>
+                    <button class="input-button number-char">.</button>
+                </t>
+                <t t-if="!widget.pos.config.allow_numpad">
+                    <button class="input-button numpad-minus" style="visibility: hidden">+/-</button>
+                    <button class="input-button number-char" style="visibility: hidden">0</button>
+                    <button class="input-button number-char" style="visibility: hidden">.</button>
+                </t>
+                <t t-if="widget.pos.config.allow_remove_line">
+                    <button class="input-button numpad-backspace" title="Remove Line Selected, Keyboard Event: Del">
+                        <img style="pointer-events: none;" src="/pos_retail/static/src/icons/trash.png" width="24" height="21" />
+                    </button>
+                </t>
+                <t t-if="!widget.pos.config.allow_remove_line">
+                    <button class="input-button numpad-backspace" style="visibility: hidden">
+                        <img style="pointer-events: none;" src="/pos_retail/static/src/icons/trash.png" width="24" height="21" />
+                    </button>
+                </t>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="PaymentScreen-Numpad">
+        <t t-jquery="button[class*='numpad-backspace']" t-operation="after">
+            <button class="input-button number-char" data-action='-'>-</button>
+        </t>
+    </t>
+
+</templates>

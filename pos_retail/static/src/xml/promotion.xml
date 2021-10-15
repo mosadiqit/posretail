@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="popup_selection_promotions">
+        <div class="modal-dialog">
+            <div class="popup popup-selection">
+                <div class="card">
+                    <h4 class="card-title">
+                        <t t-esc=" widget.options.title || 'Select' "/>
+                    </h4>
+                    <div class="card-content">
+                    </div>
+                    <div class="form-footer text-center">
+                        <div class="btn btn-success confirm" style="width: 25%;display: inline-block;">
+                            <i class="fa fa-check"/>
+                            Add selected
+                        </div>
+                        <div class="btn btn-danger add_all" style="width: 25%;display: inline-block;">
+                            <i class="fa fa-check"/>
+                            Add all
+                        </div>
+                        <div class="btn btn-danger cancel" style="width: 25%;display: inline-block;">
+                            Cancel
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="promotion_list">
+        <t t-if="promotions">
+            <div class='selection scrollable-y touch-scrollable'>
+                <t t-set="number" t-value="1"/>
+                <t t-foreach="promotions || []" t-as="promotion">
+                    <div class="selection-item" t-att-data-id="promotion.id">
+                        <span class="line_number"><t t-esc="number"/>. </span>
+                        <t t-esc="promotion['name']"/>
+                        <t t-set="number" t-value="number + 1"/>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="button_promotion">
+        <div class="left_button" title="Click and choice Promotions Program need apply to your Client">
+            <div class="button-icon">
+                <img src="/pos_retail/static/src/icons/promotions.png" class="pos_logo"/>
+            </div>
+            <div class="button-name">
+                Promotions
+            </div>
+        </div>
+    </t>
+
+    <t t-name="button_remove_promotion">
+        <div class="left_button" title="Remove all Promotions applied">
+            <div class="button-icon">
+                <img src="/pos_retail/static/src/icons/trash.png" class="pos_logo"/>
+            </div>
+            <div class="button-name">
+                Remove promotions
+            </div>
+        </div>
+    </t>
+
+    <t t-name="promotion_recommend_customer">
+        <t t-if="promotions">
+            <div class="promotion-label">
+                Promotions active:
+            </div>
+            <ul class="info-list">
+                <t t-set="number" t-value="1"/>
+                <t t-foreach="promotions" t-as="promotion">
+                    <div class="info promotion_active">
+                        <span class="line_number"><t t-esc="number"/>. </span>
+                        <t t-esc="promotion['name']"/>
+                        <t t-set="number" t-value="number + 1"/>
+                    </div>
+                </t>
+            </ul>
+        </t>
+    </t>
+
+<!--    <t t-extend="Orderline">-->
+<!--        <t t-jquery="span[class*='product-name']" t-operation="append">-->
+<!--            <t t-if="line.promotion">-->
+<!--                <div class="info promotion-line">-->
+<!--                    <t t-esc="line.promotion_reason"/>-->
+<!--                </div>-->
+<!--            </t>-->
+<!--        </t>-->
+<!--    </t>-->
+
+    <t t-extend="OrderWidget">
+        <t t-jquery=".summary" t-operation="append">
+            <t t-if="widget.pos.promotions and widget.pos.promotions.length > 0">
+                <div class="promotion_details touch-scrollable scrollable-y">
+                    <div class="promotion_recommend_customer"/>
+                </div>
+            </t>
+        </t>
+    </t>
+
+    <t t-extend="XmlReceipt">
+         <t t-jquery="line[class*='total']" t-operation="before">
+            <t t-if="pos.config.promotion == true and receipt.promotion_amount">
+                <line class='total' size='double-height'>
+                    <left><pre>        Promotions</pre></left>
+                    <right><value><t t-esc='receipt.promotion_amount || 0.00' /></value></right>
+                </line>
+                <br/>
+                <line><right>--------</right></line>
+            </t>
+        </t>
+    </t>
+
+    <t t-name="button_buyer_promotion">
+        <div class="left_button">
+            <div class="button-icon">
+                <img src="/pos_retail/static/src/icons/promotions.png" class="pos_logo"/>
+            </div>
+            <div class="button-name">
+                Buyer promotion
+            </div>
+        </div>
+    </t>
+
+    <t t-extend="ClientDetails">
+        <t t-jquery="div[class*='client-details-right']" t-operation="append">
+            <div class='client-detail'>
+                <span class='label'>Birthday</span>
+                <span class='detail'>
+                    <t t-if="!partner.birthday_date">
+                        N/A
+                    </t>
+                    <t t-if="partner.birthday_date">
+                        <t t-esc='partner.birthday_date'/>
+                    </t>
+                </span>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="ClientLine">
+        <t t-jquery=".client-line" t-operation="append">
+            <td>
+                <t t-if="!partner.birthday_date">
+                    N/A
+                </t>
+                <t t-if="partner.birthday_date">
+                    <t t-esc='partner.birthday_date'/>
+                </t>
+            </td>
+        </t>
+    </t>
+
+</templates>

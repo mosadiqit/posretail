@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="pos_promotion_form" model="ir.ui.view">
+            <field name="name">pos.promotion.form</field>
+            <field name="model">pos.promotion</field>
+            <field name="arch" type="xml">
+                <form string="Promotion">
+                    <header>
+                        <button name="sync_promotion_all_pos_online"
+                                string="Sync promotions to pos sessions online"
+                                type="object"
+                                groups="point_of_sale.group_pos_manager" class="btn-primary"/>
+                        <field name="state" widget="statusbar" clickable="true"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="type"/>
+                                <field name="product_id" required="1"/>
+                                <field name="promotion_birthday"/>
+                                <field name="promotion_birthday_type" attrs="{'required': [('promotion_birthday', '=', True)], 'invisible': [('promotion_birthday', '!=', True)]}"/>
+                                <field name="promotion_group"/>
+                                <field name="promotion_group_ids" widget="many2many_tags" attrs="{'required': [('promotion_group', '=', True)], 'invisible': [('promotion_group', '!=', True)]}"/>
+                            </group>
+                            <group>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                                <field name="discount_first_order"
+                                       attrs="{'invisible': [('type', '!=', '11_first_order')], 'required': [('type', '=', '11_first_order')]}"/>
+                                <field name="discount_lowest_price"
+                                       attrs="{'invisible': [('type', '!=', '8_discount_lowest_price')], 'required': [('type', '=', '8_discount_lowest_price')]}"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <group string="Discounts each order total"
+                               attrs="{'invisible': [('type', '!=', '1_discount_total_order')], 'required': [('type', '=', '1_discount_total_order')]}">
+                            <field name="discount_order_ids" nolabel="1">
+                                <tree string="Discounts" editable="1">
+                                    <field name="minimum_amount"/>
+                                    <field name="discount"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="Discounts each pos category"
+                               attrs="{'invisible': [('type', '!=', '2_discount_category')], 'required': [('type', '=', '2_discount_category')]}">
+                            <field name="discount_category_ids" nolabel="1">
+                                <tree string="Discount Categories" editable="1">
+                                    <field name="category_id"/>
+                                    <field name="discount"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="Discounts each qty of product"
+                               attrs="{'invisible': [('type', '!=', '3_discount_by_quantity_of_product')], 'required': [('type', '=', '3_discount_by_quantity_of_product')]}">
+                            <field name="discount_quantity_ids" nolabel="1">
+                                <tree string="Discounts Quantity" editable="1">
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                    <field name="discount"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="Discounts pack (buy products a,b,c ... will discount n (%) products x,y,z ...)"
+                               attrs="{'invisible': [('type', '!=', '4_pack_discount')], 'required': [('type', '=', '4_pack_discount')]}">
+                            <separator string="Products need apply" colspan="4"/>
+                            <field name="discount_condition_ids" nolabel="1">
+                                <tree string="Gifts Condition" editable="1">
+                                    <field name="product_id"/>
+                                    <field name="minimum_quantity"/>
+                                </tree>
+                            </field>
+                            <separator string="Products need discount" colspan="4"/>
+                            <field name="discount_apply_ids" nolabel="1">
+                                <tree string="Gifts Condition" editable="1">
+                                    <field name="product_id"/>
+                                    <field name="discount"/>
+                                    <field name="type"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="Free items (buy product x+y+z ... will free products a+b+c ...)"
+                               attrs="{'invisible': [('type', '!=', '5_pack_free_gift')], 'required': [('type', '=', '5_pack_free_gift')]}">
+                            <separator string="Products need apply" colspan="4"/>
+                            <field name="gift_condition_ids" nolabel="1">
+                                <tree string="Gifts Condition" editable="1">
+                                    <field name="product_id"/>
+                                    <field name="minimum_quantity"/>
+                                </tree>
+                            </field>
+                            <separator string="Free items" colspan="4"/>
+                            <field name="gift_free_ids" nolabel="1">
+                                <tree string="Gifts Condition" editable="1">
+                                    <field name="product_id"/>
+                                    <field name="quantity_free"/>
+                                    <field name="type"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="Sale price each quantity of product"
+                               attrs="{'invisible': [('type', '!=', '6_price_filter_quantity')], 'required': [('type', '=', '6_price_filter_quantity')]}">
+                            <field name="price_ids" nolabel="1">
+                                <tree string="Prices" editable="1">
+                                    <field name="product_id"/>
+                                    <field name="minimum_quantity"/>
+                                    <field name="price_down"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="Products each special category"
+                               attrs="{'invisible': [('type', '!=', '7_special_category')], 'required': [('type', '=', '7_special_category')]}">
+                            <field name="special_category_ids" nolabel="1">
+                                <tree string="Special Category" editable="1">
+                                    <field name="category_id"/>
+                                    <field name="type"/>
+                                    <field name="count"/>
+                                    <field name="discount"/>
+                                    <field name="product_id" attrs="{'required': [('type', '=', 'free')]}"
+                                           domain="[('pos_categ_id', '=', category_id)]"/>
+                                    <field name="qty_free" attrs="{'required': [('type', '=', 'free')]}"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="Products and quantity will apply"
+                               attrs="{'invisible': [('type', '!=', '9_multi_buy')], 'required': [('type', '=', '9_multi_buy')]}">
+                            <field name="multi_buy_ids" nolabel="1">
+                                <tree string="Buy X for price" editable="1">
+                                    <field name="product_id"/>
+                                    <field name="qty_apply"/>
+                                    <field name="list_price"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="By X free items"
+                               attrs="{'invisible': [('type', '!=', '10_buy_x_get_another_free')], 'required': [('type', '=', '10_buy_x_get_another_free')]}">
+                            <group>
+                                <field name="minimum_items"
+                                       attrs="{'required': [('type', '=', '10_buy_x_get_another_free')]}"/>
+                            </group>
+                            <group colspan="4">
+                                <field name="product_ids" nolabel="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Only customers apply">
+                                <field name="special_customer_ids" colspan="4" nolabel="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="pos_promotion_tree" model="ir.ui.view">
+            <field name="name">pos.promotion.tree</field>
+            <field name="model">pos.promotion</field>
+            <field name="arch" type="xml">
+                <tree string="Promotions">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pos_promotion_search" model="ir.ui.view">
+            <field name="name">pos.promotion.filter</field>
+            <field name="model">pos.promotion</field>
+            <field name="arch" type="xml">
+                <search string="Promotion Search">
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="product_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_pos_promotion">
+            <field name="name">Promotions</field>
+            <field name="res_model">pos.promotion</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_action_pos_promotion"
+                  parent="menu_master_data"
+                  sequence="13"
+                  action="action_pos_promotion"
+        />
+
+    </data>
+</odoo>

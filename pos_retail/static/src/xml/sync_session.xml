@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="button_test_sync">
+        <div class="left_button" title="Test Sync between Sessions">
+            <div class="button-icon">
+                <i class="fa fa-bug" style="color: red"/>
+            </div>
+            <div class="button-name">
+                Test Sync
+            </div>
+        </div>
+    </t>
+
+    <t t-name="button_remove_orders">
+        <div class="left_button" title="Remove Orders">
+            <div class="button-icon">
+                <i class="fa fa-bug" style="color: red"/>
+            </div>
+            <div class="button-name">
+                Remove Orders
+            </div>
+        </div>
+    </t>
+
+    <t t-name="button_sync_selected_order">
+        <div class="left_button" title="Sync Selected Order to another Sessions">
+            <div class="button-icon">
+                <i class="fa fa-fw fa-refresh" style="color: blue"/>
+            </div>
+            <div class="button-name">
+                Sync Selected Order
+            </div>
+        </div>
+    </t>
+
+
+    <t t-extend="Orderline">
+        <t t-jquery="div[class*='extra_functions']" t-operation="append">
+            <t t-if="widget.pos.config.display_person_add_line and line.selected and line.session_info and line.session_info.user and line.session_info.date">
+                <ul class="bus-info">
+                    <i class="fa fa-refresh"/>  <t t-esc="line.session_info.user.name"/> added at <t t-esc="line.session_info.date"/>
+                </ul>
+            </t>
+        </t>
+    </t>
+
+</templates>

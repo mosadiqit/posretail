@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="popup_invoice_register_payment">
+        <div class="modal-dialog">
+            <div class="popup popup-textinput" style="height: 35%">
+                <div class="card">
+                    <div class="card-content">
+                        <h4 class="card-title">
+                            <t t-if="widget.options.invoice">
+                                Invoice Number: <t t-esc="widget.options.invoice.number"/>
+                            </t>
+                        </h4>
+                        <t t-if="widget.options.invoice">
+                            <div class="row">
+                                <label class="label voucher-label">Residual</label>
+                                <div class="col-sm-10">
+                                    <div class="form-group label-floating is-empty">
+                                        <input type="number" class="form-control field" t-att-value="widget.options.invoice.residual" name="residual"/>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class="label voucher-label">Payment Journal</span>
+                                <div class="col-sm-10">
+                                     <select class='form-control voucher-select field' name='journal_id'>
+                                        <t t-if="widget.pos.cashregisters">
+                                            <t t-foreach='widget.pos.cashregisters' t-as='cashregister'>
+                                                <option t-att-value='cashregister.journal_id[0]'>
+                                                    <t t-esc='cashregister.journal_id[1]'/>
+                                                </option>
+                                            </t>
+                                        </t>
+                                    </select>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                    <span class="card-issue"/>
+                    <div class="form-footer text-center">
+                        <div class="btn btn-success pull-right confirm">
+                            Register
+                        </div>
+                        <div class="btn btn-danger pull-left cancel">
+                            Close
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="invoices_screen">
+        <div class="clientlist-screen screen">
+            <div class="full_width screen-content">
+                <section class="top-content">
+                    <span class='button back'>
+                        <i class='fa fa-angle-double-left'></i>
+                        Back
+                    </span>
+                    <span class='searchbox search-invoice'>
+                        <input placeholder='Search Invoice' />
+                        <span class='search-clear'/>
+                    </span>
+                    <span class="button button_sync">
+                        Sync
+                        <i class="fa fa-refresh"></i>
+                    </span>
+                    <span class='searchbox'></span>
+                    <span class='button button-top-right highlight invoices_open'>
+                        Only Open
+                        <i class='fa fa-info'></i>
+                    </span>
+                </section>
+                <section class="full-content">
+                    <div class='window'>
+                        <section class='subwindow collapsed'>
+                            <div class='subwindow-container collapsed'>
+                                <div class='subwindow-container-fix invoice-details-contents'>
+                                </div>
+                            </div>
+                        </section>
+                        <section class='subwindow'>
+                            <div class='subwindow-container'>
+                                <div class='subwindow-container-fix touch-scrollable scrollable-y'>
+                                    <table class='touch-scrollable scrollable-y client-list'>
+                                        <thead>
+                                            <tr>
+                                                <th><a href="#" class="sort sort_by_invoice_id">ID</a></th>
+                                                <th><a href="#" class="sort sort_by_invoice_create_date">Create date</a></th>
+                                                <th><a href="#" class="sort sort_by_invoice_number">Number</a></th>
+                                                <th><a href="#" class="sort sort_by_invoice_origin">Origin</a></th>
+                                                <th><a href="#" class="sort sort_by_invoice_partner_name">Partner</a></th>
+                                                <th><a href="#" class="sort sort_by_invoice_payment_term_id">Payment term</a></th>
+                                                <th><a href="#" class="sort sort_by_invoice_date_invoice">Date invoice</a></th>
+                                                <th><a href="#" class="sort sort_by_invoice_date_due">Date Due</a></th>
+                                                <th><a href="#" class="sort sort_by_invoice_user_id">Sale Person</a></th>
+                                                <th><a href="#" class="sort sort_by_invoice_amount_tax">Tax</a></th>
+                                                <th><a href="#" class="sort sort_by_invoice_amount_total">Total</a></th>
+                                                <th><a href="#" class="sort sort_by_invoice_residual">Amount due</a></th>
+                                                <th><a href="#" class="sort sort_by_invoice_state">State</a></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class='client-list-contents invoice-list'>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="invoice_row">
+        <tr t-attf-class='invoice-line #{invoice.state}' t-att-data-id='invoice.id'>
+            <td>
+                <t t-esc='invoice.id'/>
+            </td>
+            <td>
+                <t t-esc='invoice.create_date'/>
+            </td>
+            <td>
+                <t t-if="invoice.number">
+                    <t t-esc='invoice.number'/>
+                </t>
+                <t t-if="!invoice.number">
+                    N/A
+                </t>
+            </td>
+            <td>
+                <t t-if="invoice.origin">
+                    <t t-esc='invoice.origin'/>
+                </t>
+                <t t-if="!invoice.origin">
+                    N/A
+                </t>
+            </td>
+            <td>
+                <t t-if="invoice.partner_id">
+                    <t t-esc='invoice.partner_id[1]'/>
+                </t>
+                <t t-if="!invoice.partner_id">
+                    N/A
+                </t>
+            </td>
+            <td>
+                <t t-if="invoice.payment_term_id">
+                    <t t-esc='invoice.payment_term_id[1]'/>
+                </t>
+                <t t-if="!invoice.payment_term_id">
+                    N/A
+                </t>
+            </td>
+            <td>
+                <t t-if="invoice.date_invoice">
+                    <t t-esc='invoice.date_invoice'/>
+                </t>
+                <t t-if="!invoice.date_invoice">
+                    N/A
+                </t>
+            </td>
+            <td>
+                <t t-if="invoice.date_due">
+                    <t t-esc='invoice.date_due'/>
+                </t>
+                <t t-if="!invoice.date_due">
+                    N/A
+                </t>
+            </td>
+            <td>
+                <t t-if="invoice.user_id">
+                    <t t-esc='invoice.user_id[1]'/>
+                </t>
+                <t t-if="!invoice.user_id">
+                    N/A
+                </t>
+            </td>
+            <td>
+                <t t-esc='widget.format_currency_no_symbol(invoice.amount_tax)'/>
+            </td>
+            <td>
+                <t t-esc='widget.format_currency_no_symbol(invoice.amount_total)'/>
+            </td>
+            <td>
+                <t t-esc='widget.format_currency_no_symbol(invoice.residual)'/>
+            </td>
+            <td>
+                <t t-if="invoice.state == 'draft'">Draft</t>
+                <t t-if="invoice.state == 'open'">Open</t>
+                <t t-if="invoice.state == 'paid'">Paid</t>
+                <t t-if="invoice.state == 'cancel'">Cancelled</t>
+            </td>
+        </tr>
+    </t>
+
+    <t t-name="invoice_detail">
+        <section class='touch-scrollable scrollable-y client-details' style="max-height: 600px;min-height: 300px;height: fit-content;">
+            <t t-if='invoice.partner_id'>
+                <div class='client-picture'>
+                    <img t-att-src='widget.partner_icon_url(invoice.partner_id[0])' />
+                </div>
+            </t>
+            <div class='client-name'>
+                <t t-if="invoice.number">
+                    <t t-esc="invoice.number"/>
+                </t>
+                <t t-if="!invoice.number">
+                    N/A
+                </t>
+            </div>
+            <div class='client-details-box clearfix'>
+                <div class='client-details-left'>
+                    <div class='client-detail'>
+                        <span class='label'>Partner</span>
+                        <t t-if='invoice.partner_id'>
+                            <span class='detail client-address'><t t-esc='invoice.partner_id[1]' /></span>
+                        </t>
+                        <t t-if='!invoice.partner_id'>
+                            <span class='detail client-address empty'>N/A</span>
+                        </t>
+                    </div>
+                    <div class='client-detail'>
+                        <span class='label'>Origin</span>
+                        <t t-if='invoice.origin'>
+                            <span class='detail client-origin'><t t-esc='invoice.origin' /></span>
+                        </t>
+                        <t t-if='!invoice.origin'>
+                            <span class='detail client-origin empty'>N/A</span>
+                        </t>
+                    </div>
+                    <div class='client-detail'>
+                        <span class='label'>Date Invoice</span>
+                        <t t-if='invoice.date_invoice'>
+                            <span class='detail client-phone'><t t-esc='invoice.date_invoice' /></span>
+                        </t>
+                        <t t-if='!invoice.date_invoice'>
+                            <span class='detail client-phone empty'>N/A</span>
+                        </t>
+                    </div>
+                    <div class='client-detail'>
+                        <span class='label'>Invoice Lines</span>
+                        <div class='invoice_lines_detail'/>
+                    </div>
+                </div>
+                <div class='client-details-right'>
+                    <div class='client-detail invoice-action inv-print-invoice'>
+                        <span class='label'>Print</span>
+                        <button type="button" rel="tooltip" class="btn btn-success button_form">
+                            <i class="fa fa-print"/>
+                        </button>
+                    </div>
+                    <t t-if="invoice.residual > 0">
+                        <div class='client-detail invoice-action inv-print-invoice-without-payment'>
+                            <span class='label'>Invoice without payment</span>
+                            <button type="button" rel="tooltip" class="btn btn-success button_form">
+                                <i class="fa fa-print"/>
+                            </button>
+                        </div>
+                    </t>
+                    <t t-if="invoice['state'] == 'draft'">
+                        <div class='client-detail invoice-action inv-action_invoice_open'>
+                            <span class='label'>Validate</span>
+                            <button type="button" rel="tooltip" class="btn btn-success button_form">
+                                <i class="fa fa-check"/>
+                            </button>
+                        </div>
+                    </t>
+                    <t t-if="invoice['state'] == 'open'">
+                        <div class='client-detail invoice-action inv-register-payment'>
+                            <span class='label'>Register Payment</span>
+                            <button type="button" rel="tooltip" class="btn btn-success button_form">
+                                <i class="fa fa-pencil-square"/>
+                            </button>
+                        </div>
+                    </t>
+                    <t t-if="(invoice['type'] == 'out_invoice' || invoice['type'] == 'in_invoice') and (invoice['state']  == 'open' || invoice['state'] == 'paid')">
+                        <t t-if="invoice.amount_total > 0">
+                            <div class='client-detail invoice-action inv-add-credit-note'>
+                                <span class='label'>Add credit note</span>
+                                <button type="button" rel="tooltip" class="btn btn-success button_form">
+                                    <i class="fa fa-pencil-square"/>
+                                </button>
+                            </div>
+                        </t>
+                    </t>
+                    <div class='client-detail'>
+                        <span class='label'>Open Invoice</span>
+                        <a class='so_link' target='_blank' t-att-href="invoice.link">(Click here)</a>
+                    </div>
+                    <div class='client-detail state'>
+                        <span class='label'>State</span>
+                        <t t-if="invoice.state == 'draft'">Draft</t>
+                        <t t-if="invoice.state == 'open'">Open</t>
+                        <t t-if="invoice.state == 'paid'">Paid</t>
+                        <t t-if="invoice.state == 'cancel'">Cancelled</t>
+                    </div>
+                    <div class='client-detail'>
+                        <span class='label'>Payment term</span>
+                        <t t-if='invoice.payment_term_id'>
+                            <span class='detail client-email'><t t-esc='invoice.payment_term_id[1]' /></span>
+                        </t>
+                        <t t-if='!invoice.payment_term_id'>
+                            <span class='detail client-email empty'>N/A</span>
+                        </t>
+                    </div>
+
+                    <div class='client-detail state'>
+                        <span class='label'>Tax</span>
+                        <t t-esc='widget.format_currency(invoice.amount_tax)'/>
+                    </div>
+                    <div class='client-detail state'>
+                        <span class='label'>Total</span>
+                        <t t-esc='widget.format_currency(invoice.amount_total)'/>
+                    </div>
+                    <div class='client-detail state'>
+                        <span class='label'>Due</span>
+                        <t t-esc='widget.format_currency(invoice.residual)'/>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </t>
+
+    <t t-name="account_invoice_lines">
+        <table class='client-list'>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Discount</th>
+                    <th>Sub total</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody class='client-list-contents'>
+                <t t-foreach='account_invoice_lines' t-as='line'>
+                    <tr class='client-line' t-att-data-id='line.id'>
+                        <td><t t-esc='line.product_id[1]'/></td>
+                        <td><t t-esc='line.quantity'/></td>
+                        <td><t t-esc='line.price_unit'/></td>
+                        <td><t t-esc='line.discount'/></td>
+                        <td><t t-esc='line.price_subtotal'/></td>
+                        <td><t t-esc='line.price_total'/></td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </t>
+
+</templates>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <data>
+
+        <record id="remove_pos_order" model="ir.ui.view">
+            <field name="name">Remove orders</field>
+            <field name="model">remove.pos.order</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Delete Order">
+                    <group>
+                        <field name="pos_security_pin" password="True"/>
+                    </group>
+                    <footer>
+                        <button name="remove_pos_orders" class="oe_highlight" string="Remove"
+                                type="object"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Delete Orders"
+            res_model="remove.pos.order"
+            src_model="pos.order"
+            view_mode="form"
+            multi="True"
+            view_type="form"
+            target="new"
+            id="action_remove_pos_order_multi"/>
+
+       <act_window name="Delete Order"
+            res_model="remove.pos.order"
+            src_model="pos.order"
+            view_mode="form"
+            view_type="form"
+            target="new"
+            id="action_remove_pos_order_single"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+
+        <menuitem id="menu_master_data"
+                  name="Retailers"
+                  parent="point_of_sale.menu_point_root"
+                  groups="point_of_sale.group_pos_manager"
+        />
+
+        <menuitem id="menu_product_variant"
+                  name="Variants value"
+                  parent="menu_master_data"
+                  sequence="7"
+                  groups="point_of_sale.group_pos_manager"
+        />
+
+        <menuitem id="menu_attribute_action" parent="menu_product_variant" action="product.attribute_action"/>
+        <menuitem id="menu_variants_action" parent="menu_product_variant" action="product.variants_action"/>
+
+        <menuitem id="menu_clients"
+                  name="Clients"
+                  parent="point_of_sale.menu_point_root"
+                  groups="point_of_sale.group_pos_manager"
+        />
+
+        <menuitem id="menu_catalog_pricelists"
+                  name="Pricelists"
+                  parent="menu_clients"
+                  action="product.product_pricelist_action2"
+                  sequence="1"
+                  groups="product.group_sale_pricelist"/>
+        <menuitem id="menu_action_partner_form"
+                  name="Customers"
+                  sequence="2"
+                  parent="menu_clients"
+                  action="base.action_partner_form"/>
+        <menuitem id="menu_action_partner_supplier_form"
+                  name="Vendors"
+                  parent="menu_clients"
+                  sequence="3"
+                  action="base.action_partner_supplier_form"/>
+
+        <menuitem id="menu_pos_database"
+                  name="Database"
+                  parent="menu_master_data"
+                  sequence="100"
+                  groups="point_of_sale.group_pos_manager"
+        />
+
+    </data>
+</odoo>

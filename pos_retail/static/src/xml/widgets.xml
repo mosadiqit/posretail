@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="NewsWidget">
+        <div class="ribbon"><span><t t-esc="title"></t></span></div>
+    </t>
+
+    <t t-name="button_list_widget">
+        <div class="oe_status js_proxy show_hide_buttons" title="Show/Hide List Buttons, Keyboard Event: b">
+            <div class="js_connected oe_icon">
+                <i class='fa fa-list'></i>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="product_tooltip">
+        <div class="debug-widget info_tooltip" id="info_tooltip">
+            <div class="toggle close_button"><i class='fa fa-times' /></div>
+            <div class="content">
+                <ul>
+                    <ul>
+                        <li class="button tooltip-info"><i class="fa fa-caret-right"></i>Name: <t t-esc="product.display_name"/></li>
+                        <t t-if="product.default_code">
+                            <li class="button tooltip-info"><i class="fa fa-caret-right"></i>Internal Ref: <t t-esc="product.default_code"/></li>
+                        </t>
+                        <t t-if="product.barcode">
+                            <li class="button tooltip-info"><i class="fa fa-caret-right"></i>Barcode: <t t-esc="product.barcode"/></li>
+                        </t>
+                        <li class="button tooltip-info"><i class="fa fa-caret-right"></i>Unit Of Measure: <t t-esc="product.uom_id[1]"/></li>
+                        <li class="button tooltip-info"><i class="fa fa-caret-right"></i>Price: <t t-esc="product.list_price"/></li>
+                        <t t-if="product.volume">
+                            <li class="button tooltip-info"><i class="fa fa-caret-right"></i>Volume: <t t-esc="product.volume"/></li>
+                        </t>
+                        <t t-if="product.weight">
+                            <li class="button tooltip-info"><i class="fa fa-caret-right"></i>Weight: <t t-esc="product.weight"/></li>
+                        </t>
+                        <li class="button tooltip-info"><i class="fa fa-caret-right"></i>Min sale: <t t-esc="product.minimum_list_price"/></li>
+                        <t t-if="last_price">
+                            <li class="button tooltip-info"><i class="fa fa-caret-right"></i>Last price: <t t-esc="last_price"/></li>
+                        </t>
+                        <t t-if="last_order_name">
+                            <li class="button tooltip-info"><i class="fa fa-caret-right"></i>Last order: <t t-esc="last_order_name"/></li>
+                        </t>
+                    </ul>
+                    <ul>
+                        <t t-if="product.description_sale">
+                            <li class="button tooltip-info"><i class="fa fa-caret-right"></i>Description for Customers: <t t-esc="product.description_sale"/></li>
+                        </t>
+                        <t t-if="product.description_pickingout">
+                            <li class="button tooltip-info"><i class="fa fa-caret-right"></i>Description for Delivery Orders: <t t-esc="product.description_pickingout"/></li>
+                        </t>
+                        <t t-if="product.description_pickingin">
+                            <li class="button tooltip-info"><i class="fa fa-caret-right"></i>Description for Receptions: <t t-esc="product.description_pickingin"/></li>
+                        </t>
+                        <t t-if="product.description_picking">
+                            <li class="button tooltip-info"><i class="fa fa-caret-right"></i>Description for Internal Transfers: <t t-esc="product.description_picking"/></li>
+                        </t>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </t>
+
+</templates>

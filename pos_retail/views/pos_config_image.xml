@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="pos_config_image_tree" model="ir.ui.view">
+            <field name="name">pos.config.image.tree</field>
+            <field name="model">pos.config.image</field>
+            <field name="arch" type="xml">
+                <tree string="Image customer screen">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pos_config_image_form" model="ir.ui.view">
+            <field name="name">pos.config.image.form</field>
+            <field name="model">pos.config.image</field>
+            <field name="arch" type="xml">
+                <form string="Image">
+                    <field name="image" widget='image' class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="config_id"/>
+                        <field name="description"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_pos_config_image">
+            <field name="name">Image customer screen</field>
+            <field name="res_model">pos.config.image</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_action_pos_config_image"
+                  parent="menu_master_data"
+                  sequence="5"
+                  action="action_pos_config_image"
+        />
+
+    </data>
+</odoo>

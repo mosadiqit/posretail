@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+	<t t-name="popup_create_lots">
+	    <div class="modal-dialog">
+            <div class="popup popup-textinput balance-popup">
+                <t t-if="widget.options.title">
+					<p class="title"><t t-esc=" widget.options.title || '' " /></p>
+				</t>
+				<t t-if="widget.options.body">
+                	<p class="body"><t t-esc=" widget.options.body || '' " /></p>
+				</t>
+              	<div class='lots-grid'>
+					<table class="client-list" id="lots_tree">
+						<thead>
+							<th>Serial/Number</th>
+							<th>Product</th>
+							<th>Quantity</th>
+							<th>Delete</th>
+						</thead>
+						<tbody class="client-list-contents">
+							<t t-set="index" t-value="1" />
+							<t>
+								<tr>
+									<td class='lot-add'>
+										<span class="fa fa-plus" name="add"> </span>
+									</td>
+									<td></td>
+									<td></td>
+								</tr>
+							</t>
+						</tbody>
+					</table>
+                </div>
+				<span class="card-issue"/>
+				<div class="form-footer text-center">
+					<div class="btn btn-success pull-right confirm">
+						<i class="fa fa-check"/> Create
+					</div>
+					<div class="btn btn-danger pull-left cancel">
+						Cancel
+					</div>
+				</div>
+            </div>
+        </div>
+    </t>
+
+	<t t-name="button_create_lots">
+        <div class="left_button" title="Click and create Lots/Serial">
+            <div class="button-icon">
+                <i class="fa fa-barcode"/>
+            </div>
+            <div class="button-name">
+                Create lots
+            </div>
+        </div>
+    </t>
+
+    <t t-name="popup_set_multi_lots">
+	    <div class="modal-dialog clientlist-screen">
+            <div class="popup popup-textinput balance-popup">
+				<t t-if="widget.options.title">
+                	<p class="title"><t t-esc=" widget.options.title || '' " /></p>
+				</t>
+				<t t-if="widget.options.body">
+                	<p class="body"><t t-esc=" widget.options.body || '' " /></p>
+				</t>
+              	<div class='lots-grid'>
+					<table class="client-list" id="lots_list">
+						<thead>
+							<th>Lot name</th>
+							<th>Quantity</th>
+							<th>Delete</th>
+						</thead>
+						<tbody class="client-list-contents">
+							<t t-set="index" t-value="1" />
+							<t t-if="widget.options.lot_ids">
+								<t t-foreach='widget.options.lot_ids' t-as='lot'>
+									<tr t-att-id="index">
+										<td>
+											<select style="width: 100%; height: 60px" class='form-control detail lot_input' name='lot_id' t-att-id='"lot_index" + index'>
+												<t t-foreach='widget.options.lots' t-as='product_lot'>
+													<option t-att-value='product_lot.id' t-att-selected="product_lot.id ? ((product_lot.id === lot.id) ? true : undefined) : undefined">
+														<t t-esc='product_lot.name'/>
+														<t t-if="product_lot.barcode">
+															[Ean13]: <t t-esc="product_lot.barcode"/>
+														</t>
+													</option>
+												</t>
+											</select>
+										</td>
+										<td>
+											<input class="lot_input" name='lot_quantity' type="number" t-att-value="lot['quantity']" t-att-id='"lot_index" + index'></input>
+										</td>
+										<td class="">
+											<span class="lot-delete fa fa-trash-o" name="delete"></span>
+										</td>
+									</tr>
+									<t t-set="index" t-value="index + 1" />
+								</t>
+							</t>
+							<t>
+								<tr>
+									<td class='lot-add'>
+										<span class="fa fa-plus" name="add"> </span>
+									</td>
+									<td></td>
+									<td></td>
+								</tr>
+							</t>
+						</tbody>
+					</table>
+                </div>
+				<span class="card-issue"/>
+               	<div class="form-footer text-center">
+					<div class="btn btn-success pull-right confirm">
+						<i class="fa fa-check"/> Create
+					</div>
+					<div class="btn btn-danger pull-left cancel">
+						Cancel
+					</div>
+				</div>
+            </div>
+        </div>
+    </t>
+
+</templates>
